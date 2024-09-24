@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {AngularFireModule} from "@angular/fire/compat";
+import {firebaseConfig} from "./shared/config/firebase.config";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    AngularFireModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
