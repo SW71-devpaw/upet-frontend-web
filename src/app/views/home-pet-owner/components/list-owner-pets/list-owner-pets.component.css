@@ -16,7 +16,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 80%; /* Ajusta el ancho máximo según sea necesario */
+  width: 90%; /* Ajusta el ancho máximo según sea necesario */
   overflow-x: auto;
   margin: 0 auto; /* Centra el contenedor */
   background: #fff; /* Fondo blanco para la cinta */

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {VetResponse} from "../../../views/home-pet-owner/interfaces/VetResponse";
 
 @Component({
   selector: 'app-vet-card',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './vet-card.component.css'
 })
 export class VetCardComponent {
-
+  @Input() vet!: VetResponse;
 }

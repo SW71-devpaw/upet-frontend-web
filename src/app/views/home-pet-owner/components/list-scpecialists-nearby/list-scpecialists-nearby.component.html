@@ -1,1 +1,11 @@
-<p>list-scpecialists-nearby works!</p>
+<div class="my-vets-container mt-5 mb-5">
+  <div class="header">
+    <div class="title">Best Specialists Nearby</div>
+    <div class="view-all">
+      <button class="btn-primary" >+ View all</button>
+    </div>
+  </div>
+    <div class="vets-wrapper">
+      <app-vet-card *ngFor="let vet of veterinarians" [vet]="vet" ></app-vet-card>
+    </div>
+</div>

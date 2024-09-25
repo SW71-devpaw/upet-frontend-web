@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './banner-owner.component.css'
 })
 export class BannerOwnerComponent {
-  userName: string = 'Tu Nombre'; // Cambia esto por el nombre del usuario
+  userName: string = 'Josehp Herrera'; // Cambia esto por el nombre del usuario
 }
