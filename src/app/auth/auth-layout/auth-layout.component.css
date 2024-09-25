@@ -1,0 +1,62 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+td {
+    padding-right: 8px;
+}
+
+.text {
+  color: black;
+  font-weight: bold;
+
+  &.h1 {
+    font-size: 40px;  /* Tamaño extremadamente grande en pantallas grandes */
+
+    @media (max-width: 1200px) {
+      font-size: 40px;  /* Tamaño más pequeño en pantallas medianas */
+    }
+
+    @media (max-width: 768px) {
+      font-size: 30px;  /* Tamaño más pequeño en pantallas móviles */
+    }
+
+    @media (max-width: 480px) {
+      font-size: 24px;  /* Tamaño aún más pequeño en pantallas muy pequeñas */
+    }
+  }
+
+  &.h2 {
+    font-size: 36px;
+    opacity: 0.5;  /* Opacidad al 50% */
+
+    @media (max-width: 1200px) {
+      font-size: 25px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 16px;
+    }
+  }
+  
+  &.label{
+    font-size: 32px;
+  }
+
+  &.input{
+    font-size: 32px;
+  }
+
+}
+
+
