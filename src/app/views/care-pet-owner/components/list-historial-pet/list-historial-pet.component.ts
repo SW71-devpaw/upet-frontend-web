@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import {Button} from "primeng/button";
 
 @Component({
   selector: 'app-list-historial-pet',
   standalone: true,
-  imports: [],
+  imports: [Button],
   templateUrl: './list-historial-pet.component.html',
   styleUrl: './list-historial-pet.component.css'
 })
