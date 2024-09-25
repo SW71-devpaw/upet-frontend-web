@@ -24,7 +24,19 @@
   font-size: 1rem;
   cursor: pointer;
 }
+.view-pet-detail-button{
+  background-color: #6B6BF9;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
 .list-historial-table{
   margin-top: 2rem;
   width: 100%;
+}
+.pet-history-photo{
+  border-radius: 100%
 }
