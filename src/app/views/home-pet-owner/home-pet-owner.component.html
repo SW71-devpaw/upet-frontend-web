@@ -1,6 +1,13 @@
-<div class="home-owner-view pb-5">
-  <h1>Home</h1>
-<app-banner-owner></app-banner-owner>
-<app-list-owner-pets></app-list-owner-pets>
-<app-list-scpecialists-nearby></app-list-scpecialists-nearby>
+<app-nav-bar></app-nav-bar>
+<div class="home-owner-container flex mt-16">
+  <app-sidebar (sidebarToggle)="onSidebarToggle($event)" ></app-sidebar>
+  <div [ngClass]="{'w-full': isSidebarCollapsed, 'w-4/5': !isSidebarCollapsed}" class="transition-width duration-300">
+
+    <div class="home-owner-content flex-grow p-5">
+      <h1>Home</h1>
+      <app-banner-owner></app-banner-owner>
+      <app-list-owner-pets></app-list-owner-pets>
+      <app-list-scpecialists-nearby></app-list-scpecialists-nearby>
+    </div>
+  </div>
 </div>

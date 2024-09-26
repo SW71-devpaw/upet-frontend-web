@@ -8,6 +8,9 @@ import {
 import {HomePetOwnerService} from "./services/home-pet-owner.service";
 import {PetResponse} from "./interfaces/PetResponse";
 import {FormAddPetComponent} from "./components/form-add-pet/form-add-pet.component";
+import {SidebarComponent} from "../../shared/components/sidebar/sidebar.component";
+import {NgClass} from "@angular/common";
+import {NavBarComponent} from "../../shared/components/nav-bar/nav-bar.component";
 
 @Component({
   selector: 'app-home-pet-owner',
@@ -16,11 +19,19 @@ import {FormAddPetComponent} from "./components/form-add-pet/form-add-pet.compon
     PetCardComponent,
     BannerOwnerComponent,
     ListOwnerPetsComponent,
-    ListScpecialistsNearbyComponent
+    ListScpecialistsNearbyComponent,
+    SidebarComponent,
+    NgClass,
+    NavBarComponent
   ],
   templateUrl: './home-pet-owner.component.html',
   styleUrl: './home-pet-owner.component.css'
 })
 export class HomePetOwnerComponent {
+  isSidebarCollapsed=false;
+
+  onSidebarToggle(isCollapsed:boolean){
+    this.isSidebarCollapsed = isCollapsed
+  }
 
 }

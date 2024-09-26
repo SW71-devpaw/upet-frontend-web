@@ -3,7 +3,6 @@ import {HomePetOwnerComponent} from "./views/home-pet-owner/home-pet-owner.compo
 import {CarePetOwnerComponent} from "./views/care-pet-owner/care-pet-owner.component";
 
 export const routes: Routes = [
-
   {path:"home/pet-owner", component:HomePetOwnerComponent},
   {path:"care/pet-owner", component:CarePetOwnerComponent},
     {
