@@ -4,6 +4,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {firebaseConfig} from "./shared/config/firebase.config";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

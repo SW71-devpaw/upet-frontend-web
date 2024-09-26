@@ -25,5 +25,6 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()
     ),
     { provide: FIREBASE_OPTIONS, useValue: firebaseConfig },
+
   ]
 };
