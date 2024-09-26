@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
@@ -9,9 +8,10 @@ module.exports = {
         customSidebar: '#F0F6FF',
         customBlue: '#0A1B3E'
       },
+      
       fontFamily: {
-        'custom': ['Poppins', 'sans-serif'],
-      }
+        sans: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [],
