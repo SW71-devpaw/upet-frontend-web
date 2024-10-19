@@ -1,2 +1,11 @@
-<router-outlet class="h-full"/>
+<app-nav-bar></app-nav-bar>
+<app-sidebar (sidebarToggle)="onSidebarToggle($event)"></app-sidebar>
 
+<div class="flex mt-16">
+  <div [ngClass]="{'ml-20': isSidebarCollapsed, 'ml-64': !isSidebarCollapsed}"
+       class="transition-width flex duration-300">
+
+    <router-outlet class=" ml-10 h-full"/>
+  </div>
+
+</div>

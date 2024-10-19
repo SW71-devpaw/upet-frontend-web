@@ -12,6 +12,7 @@
 @tailwind utilities;
 }
 
-html, body { margin: 0; 
+html, body { margin: 0;
     @apply font-sans;
+  background: white;
 }
