@@ -5,9 +5,10 @@ import {CarePetOwnerComponent} from "./views/care-pet-owner/care-pet-owner.compo
 export const routes: Routes = [
   {path:"home/pet-owner", component:HomePetOwnerComponent},
   {path:"care/pet-owner", component:CarePetOwnerComponent},
-    {
-        path: '',
-        loadChildren: () => import ('./auth/auth.routes').then(m=>m.AUTH_ROUTES)
-    }
+  { path: '**', component: HomePetOwnerComponent },
+  {
+    path: '',
+    loadChildren: () => import ('./auth/auth.routes').then(m=>m.AUTH_ROUTES)
+  }
 
 ];
