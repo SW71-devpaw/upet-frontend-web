@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {PetResponse} from "../../interfaces/PetResponse";
-import {PetCardComponent} from "../../../../shared/components/pet-card/pet-card.component";
+import {PetCardComponent} from "../../../../../shared/components/pet-card/pet-card.component";
 import {NgForOf} from "@angular/common";
 import {HomePetOwnerService} from "../../services/home-pet-owner.service";
 import {FormAddPetComponent} from "../form-add-pet/form-add-pet.component";

@@ -1,14 +1,11 @@
 import { Routes } from '@angular/router';
-import {HomePetOwnerComponent} from "./views/home-pet-owner/home-pet-owner.component";
-import {CarePetOwnerComponent} from "./views/care-pet-owner/care-pet-owner.component";
+import {HomePetOwnerComponent} from "./views/pet-owner/home-pet-owner/home-pet-owner.component";
+import {CarePetOwnerComponent} from "./views/pet-owner/care-pet-owner/care-pet-owner.component";
+import {AUTH_ROUTES} from "./auth/auth.routes";
+import {PET_OWNER_ROUTES} from "./views/pet-owner/pet-owner.routes";
 
 export const routes: Routes = [
-  {path:"home/pet-owner", component:HomePetOwnerComponent},
-  {path:"care/pet-owner", component:CarePetOwnerComponent},
+  ...AUTH_ROUTES,
+  ...PET_OWNER_ROUTES,
   { path: '**', component: HomePetOwnerComponent },
-  {
-    path: '',
-    loadChildren: () => import ('./auth/auth.routes').then(m=>m.AUTH_ROUTES)
-  }
-
 ];
