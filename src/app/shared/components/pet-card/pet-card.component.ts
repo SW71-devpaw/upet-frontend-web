@@ -1,10 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import {PetResponse} from "../../../views/home-pet-owner/interfaces/PetResponse";
-import {HomePetOwnerService} from "../../../views/home-pet-owner/services/home-pet-owner.service";
+import {PetResponse} from "../../../views/pet-owner/home-pet-owner/interfaces/PetResponse";
+import {HomePetOwnerService} from "../../../views/pet-owner/home-pet-owner/services/home-pet-owner.service";
 import {DialogModule} from "primeng/dialog";
-import {FormAddPetComponent} from "../../../views/home-pet-owner/components/form-add-pet/form-add-pet.component";
-import {TypeForm} from "../../../views/home-pet-owner/interfaces/type-form.enum";
+import {FormAddPetComponent} from "../../../views/pet-owner/home-pet-owner/components/form-add-pet/form-add-pet.component";
+import {TypeForm} from "../../../views/pet-owner/home-pet-owner/interfaces/type-form.enum";
 
 @Component({
   selector: 'app-pet-card',

@@ -1,0 +1,9 @@
+<app-nav-bar></app-nav-bar>
+<div class="home-owner-container flex mt-16">
+  <app-sidebar (sidebarToggle)="onSidebarToggle($event)" ></app-sidebar>
+  <div [ngClass]="{'w-full': isSidebarCollapsed, 'w-4/5': !isSidebarCollapsed}" class="transition-width duration-300">
+
+    <router-outlet></router-outlet>
+
+  </div>
+</div>
