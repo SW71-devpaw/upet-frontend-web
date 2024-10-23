@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import {DialogModule} from "primeng/dialog";
 import {FormAddPetComponent} from "../form-add-pet/form-add-pet.component";
 import {NgForOf} from "@angular/common";
-import {PetCardComponent} from "../../../../shared/components/pet-card/pet-card.component";
 import {VetResponse} from "../../interfaces/VetResponse";
-import {VetCardComponent} from "../../../../shared/components/vet-card/vet-card.component";
+import {PetCardComponent} from "../../../../../shared/components/pet-card/pet-card.component";
+import {VetCardComponent} from "../../../../../shared/components/vet-card/vet-card.component";
 
 @Component({
   selector: 'app-list-scpecialists-nearby',

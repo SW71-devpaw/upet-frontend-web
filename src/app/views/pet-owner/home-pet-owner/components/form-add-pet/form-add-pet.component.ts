@@ -13,10 +13,10 @@ import {ToastModule} from "primeng/toast";
 import {FileUploadModule, UploadEvent} from "primeng/fileupload";
 import {MessageService} from "primeng/api";
 import {NgIf} from "@angular/common";
-import {UploadService} from "../../../../shared/service/upload.service";
-import {formatDateToYYYYMMDD} from "../../../../shared/helpers/date.formater";
 import {HomePetOwnerService} from "../../services/home-pet-owner.service";
 import {TypeForm} from "../../interfaces/type-form.enum";
+import {UploadService} from "../../../../../shared/service/upload.service";
+import {formatDateToYYYYMMDD} from "../../../../../shared/helpers/date.formater";
 
 @Component({
   selector: 'app-form-add-pet',

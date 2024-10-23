@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {VetResponse} from "../../../views/home-pet-owner/interfaces/VetResponse";
+import {VetResponse} from "../../../views/pet-owner/home-pet-owner/interfaces/VetResponse";
 
 @Component({
   selector: 'app-vet-card',
