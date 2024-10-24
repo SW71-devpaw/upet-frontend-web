@@ -1,11 +1,12 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {PetResponse} from "../../interfaces/PetResponse";
+import {PetResponse} from "../../../../../core/networking/response/PetResponse";
 import {PetCardComponent} from "../../../../../shared/components/pet-card/pet-card.component";
 import {NgForOf} from "@angular/common";
 import {HomePetOwnerService} from "../../services/home-pet-owner.service";
 import {FormAddPetComponent} from "../form-add-pet/form-add-pet.component";
 import {DialogModule} from "primeng/dialog";
 import {TypeForm} from "../../interfaces/type-form.enum";
+import {PetsApiService} from "../../../../../core/networking/services/pets-api.service";
 
 @Component({
   selector: 'app-list-owner-pets',
@@ -24,11 +25,11 @@ export class ListOwnerPetsComponent {
   visibleAddPet:boolean = false;
 
   constructor(
-    private homePetOwnerService: HomePetOwnerService,
+    private petsApiService: PetsApiService,
   ) {
   }
   ngOnInit() {
-    this.homePetOwnerService.getMyPets(1).subscribe((data) => {
+    this.petsApiService.getMyPets(1).subscribe((data) => {
       this.pets = data;
     });
   }

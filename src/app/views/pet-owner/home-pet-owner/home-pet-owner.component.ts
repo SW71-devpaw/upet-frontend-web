@@ -6,7 +6,7 @@ import {
   ListScpecialistsNearbyComponent
 } from "./components/list-scpecialists-nearby/list-scpecialists-nearby.component";
 import {HomePetOwnerService} from "./services/home-pet-owner.service";
-import {PetResponse} from "./interfaces/PetResponse";
+import {PetResponse} from "../../../core/networking/response/PetResponse";
 import {FormAddPetComponent} from "./components/form-add-pet/form-add-pet.component";
 import {SidebarComponent} from "../../../shared/components/sidebar/sidebar.component";
 import {NgClass} from "@angular/common";
