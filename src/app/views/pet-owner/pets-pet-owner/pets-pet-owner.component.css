@@ -1,0 +1,21 @@
+.pets-container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-primary{
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color:#808080;
+}
+.btn-primary:hover{
+  background-color: #0A1B3E;
+  color: white;
+}

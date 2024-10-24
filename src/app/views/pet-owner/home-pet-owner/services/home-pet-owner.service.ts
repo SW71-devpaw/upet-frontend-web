@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PetResponse} from "../interfaces/PetResponse";
+import {PetResponse} from "../../../../core/networking/response/PetResponse";
 import {Observable} from "rxjs";
 
 @Injectable({

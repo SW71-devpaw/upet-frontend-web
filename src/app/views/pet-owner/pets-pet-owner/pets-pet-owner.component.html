@@ -1,0 +1,12 @@
+<div class="flex flex-column align-items-center justify-content-center p-5">
+  <h1>My pets</h1>
+  <div class="flex align-items-end justify-content-end w-full">
+    <button class="btn-primary" (click)="openDialogAddPet()">+Add pet</button>
+  </div>
+  <div class="pets-container">
+      <app-pet-card *ngFor="let pet of pets" [pet]="pet"></app-pet-card>
+  </div>
+</div>
+<p-dialog header="Add pet" [modal]="true" [(visible)]="visibleAddPet" [style]="{ width: '40rem' }">
+  <app-form-add-pet [closeDialog]="closeDialogAddPet" [mode]="TypeForm.ADD"></app-form-add-pet>
+</p-dialog>

@@ -12,6 +12,14 @@
 @tailwind utilities;
 }
 
-html, body { margin: 0; 
+html, body { margin: 0;
     @apply font-sans;
+  background: white;
+}
+:root{
+  --color-primary: #1a202c;
+  --color-white: #fff;
+  --color-button-secondary: #EB5569;
+  --color-terciary: #307176;
+  --color-button-secondary-hover: #E36275FF;
 }
