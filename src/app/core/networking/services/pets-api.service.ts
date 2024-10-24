@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PetResponse} from "../../../../core/networking/response/PetResponse";
 import {Observable} from "rxjs";
+import {PetResponse} from "../response/PetResponse";
+import {BASE_PATH_API} from "../constants/base-path-api";
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomePetOwnerService {
+export class PetsApiService {
+  basePath = BASE_PATH_API;
 
-  basePath = "https://upetbackendapi.onrender.com";
+  constructor(private http:HttpClient) {}
 
-   constructor(private http:HttpClient) {}
-
-   getMyPets(petOwnerId:number):Observable<PetResponse[]>{
+  getMyPets(petOwnerId:number):Observable<PetResponse[]>{
     const resource = `/api/v1/pets/${petOwnerId}`;
     let pets:PetResponse[] = [];
     return this.http.get<PetResponse[]>(`${this.basePath}${resource}`);
@@ -30,5 +30,8 @@ export class HomePetOwnerService {
     const resource = `/api/v1/pets/${petId}`;
     return this.http.put(`${this.basePath}${resource}`, petData);
   }
-
+  getPetById(petId:number):Observable<PetResponse>{
+    const resource = `/api/v1/pets/pet/${petId}`;
+    return this.http.get<PetResponse>(`${this.basePath}${resource}`);
+  }
 }

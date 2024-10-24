@@ -3,7 +3,7 @@ import {Button} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PetResponse} from "../../interfaces/PetResponse";
+import {PetResponse} from "../../../../../core/networking/response/PetResponse";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {Gender} from "../../interfaces/Gender";
 import {ListboxModule} from "primeng/listbox";
@@ -17,6 +17,7 @@ import {UploadService} from "../../../../../shared/service/upload.service";
 import {formatDateToYYYYMMDD} from "../../../../../shared/helpers/date.formater";
 import {HomePetOwnerService} from "../../services/home-pet-owner.service";
 import {TypeForm} from "../../interfaces/type-form.enum";
+import {PetsApiService} from "../../../../../core/networking/services/pets-api.service";
 
 @Component({
   selector: 'app-form-add-pet',
@@ -49,6 +50,7 @@ export class FormAddPetComponent {
   buttonTitle:string = "";
 
   ngOnInit() {
+    console.log({location:"Form edit pet",pet:this.pet});
     this.genders = [
       { name: 'Male', id: 1 },
       { name: 'Female', id: 2 },
@@ -70,7 +72,7 @@ export class FormAddPetComponent {
     private fb:FormBuilder,
     private messageService: MessageService,
     private uploadService: UploadService,
-    private homePetOwnerService: HomePetOwnerService
+    private petsApiService: PetsApiService
   ) {
     this.myForm = this.fb.group<PetResponse>({
       name: "",
@@ -110,11 +112,11 @@ export class FormAddPetComponent {
     };
     console.log({petRequest});
     if(this.mode === TypeForm.ADD){
-    this.homePetOwnerService.createPet(petRequest,1).subscribe(data=>{
+    this.petsApiService.createPet(petRequest,1).subscribe(data=>{
       alert("Pet created successfully");
     });}
     else{
-      this.homePetOwnerService.updatePet(petRequest,this.pet!.id!).subscribe(data=>{
+      this.petsApiService.updatePet(petRequest,this.pet!.id!).subscribe(data=>{
         alert("Pet updated successfully");
         window.location.reload();
       });
