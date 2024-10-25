@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { AUTH_ROUTES } from '../auth.routes';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../core/auth/services/auth.service';
-import { LoginRequest, LoginResponse } from '../../core/auth/models/login.interface';
 import { catchError, of } from 'rxjs';
-import { PET_OWNER_ROUTES } from '../../views/pet-owner/pet-owner.routes';
+import { LoginRequest, LoginResponse } from '../../core/auth/schema/login.interface';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

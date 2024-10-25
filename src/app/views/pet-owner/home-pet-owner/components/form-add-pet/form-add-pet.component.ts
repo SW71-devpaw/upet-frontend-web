@@ -1,30 +1,23 @@
 import {Component, ElementRef, Input} from '@angular/core';
-import {Button} from "primeng/button";
-import {DialogModule} from "primeng/dialog";
-import {InputTextModule} from "primeng/inputtext";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PetResponse} from "../../../../../core/networking/response/PetResponse";
-import {FloatLabelModule} from "primeng/floatlabel";
-import {Gender} from "../../interfaces/Gender";
-import {ListboxModule} from "primeng/listbox";
-import {DropdownModule} from "primeng/dropdown";
-import {CalendarModule} from "primeng/calendar";
-import {ToastModule} from "primeng/toast";
-import {FileUploadModule, UploadEvent} from "primeng/fileupload";
-import {MessageService} from "primeng/api";
-import {NgIf} from "@angular/common";
-<<<<<<< HEAD
-import {HomePetOwnerService} from "../../services/home-pet-owner.service";
-import {TypeForm} from "../../interfaces/type-form.enum";
-import {UploadService} from "../../../../../shared/service/upload.service";
-import {formatDateToYYYYMMDD} from "../../../../../shared/helpers/date.formater";
-=======
-import {UploadService} from "../../../../../shared/service/upload.service";
-import {formatDateToYYYYMMDD} from "../../../../../shared/helpers/date.formater";
-import {HomePetOwnerService} from "../../services/home-pet-owner.service";
-import {TypeForm} from "../../interfaces/type-form.enum";
-import {PetsApiService} from "../../../../../core/networking/services/pets-api.service";
->>>>>>> 5012362db3bbb95fc71c25ead08c598461e1963c
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Button } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
+import { ListboxModule } from 'primeng/listbox';
+import { ToastModule } from 'primeng/toast';
+import { FileUploadModule } from 'primeng/fileupload';
+import { NgIf } from '@angular/common';
+import { MessageService } from 'primeng/api';
+import { PetsApiService } from '../../../../../core/networking/services/pets-api.service';
+import { formatDateToYYYYMMDD } from '../../../../../shared/helpers/date.formater';
+import { UploadService } from '../../../../../shared/service/upload.service';
+import { Gender } from '../../interfaces/Gender';
+import { PetResponse } from '../../interfaces/PetResponse';
+import { TypeForm } from '../../interfaces/type-form.enum';
+
 
 @Component({
   selector: 'app-form-add-pet',

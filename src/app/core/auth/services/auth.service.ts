@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UpetApiService } from '../../Api/UpetBackend/upet-api.service';
 import { catchError, Observable, throwError } from 'rxjs';
-import { LoginRequest, LoginResponse } from '../models/login.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { RegisterRequest } from '../models/register.interface';
+import { LoginRequest, LoginResponse } from '../schema/login.interface';
+import { RegisterRequest } from '../schema/register.interface';
 
 @Injectable({
   providedIn: 'root'

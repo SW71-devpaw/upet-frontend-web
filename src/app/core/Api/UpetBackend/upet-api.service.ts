@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class UpetApiService {
 
-  private readonly baseUrl: string = 'upetbackendapi.onrender.com/api/v1'; 
+  private readonly baseUrl: string = 'https://upetbackendapi.onrender.com/api/v1'; 
 
   constructor(protected  http: HttpClient) {}
 
