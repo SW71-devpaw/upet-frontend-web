@@ -1,3 +1,5 @@
+import { SubscriptionType } from "../enum/subscriptionType.enum";
+
 // Interface para crear un nuevo dueño de mascota
 export interface PetOwnerSchemaPost {
     numberPhone: string;
@@ -20,11 +22,5 @@ export interface PetOwnerSchemaPost {
     location: string;
     subscriptionType: SubscriptionType;
   }
-  
-  // Ejemplo de definición de un enum para SubscriptionType, ajusta según sea necesario
-  export enum SubscriptionType {
-    FREE = 'FREE',
-    PREMIUM = 'PREMIUM',
-    VIP = 'VIP'
-  }
+
   
