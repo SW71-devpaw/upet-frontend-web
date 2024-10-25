@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { UpetApiService } from '../../Api/UpetBackend/upet-api.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Token, VeterinarianSchemaPost, VeterinarianSchemaGet, VeterinarianUpdateInformation, VeterinarianProfileSchemaGet, AvailabilitySchemaPost } from './models'; // Asegúrate de tener estos modelos definidos
+import { LoginResponse } from '../../shared/login-response.interface';
+import { VeterinarianSchemaPost, VeterinarianSchemaGet, VeterinarianProfileSchemaGet, VeterinarianUpdateInformation } from '../schema/veterinarian.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class VeterinarianService extends UpetApiService {
   }
 
   // Crear un veterinario
-  createVeterinarian(userId: number, veterinarian: VeterinarianSchemaPost): Observable<Token> {
-    return this.http.post<Token>(`${this.apiUrl}/${userId}`, veterinarian).pipe(
+  createVeterinarian(userId: number, veterinarian: VeterinarianSchemaPost): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/${userId}`, veterinarian).pipe(
       catchError(this.handleError)
     );
   }
@@ -58,7 +59,7 @@ export class VeterinarianService extends UpetApiService {
   }
 
   // Obtener horarios disponibles de un veterinario
-  getAvailableTimes(vetId: number, availabilityData: AvailabilitySchemaPost): Observable<any> {
+  getAvailableTimes(vetId: number, availabilityData: Date): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/${vetId}/available_times`, availabilityData).pipe(
       catchError(this.handleError)
     );
