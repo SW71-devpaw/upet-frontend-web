@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UpetApiService } from '../../Api/UpetBackend/upet-api.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { PetSchemaPost, PetSchemaResponse } from '../schema/pet.interface';
+import {PetSchemaRequest, PetSchemaResponse } from '../schema/pet.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class PetService extends UpetApiService {
   }
 
   // Crear una mascota
-  createPet(petOwnerId: number, pet: PetSchemaPost): Observable<PetSchemaResponse> {
+  createPet(petOwnerId: number, pet: PetSchemaRequest): Observable<PetSchemaResponse> {
     return this.http.post<PetSchemaResponse>(`${this.apiUrl}/${petOwnerId}`, pet).pipe(
       catchError(this.handleError)
     );
@@ -37,7 +37,7 @@ export class PetService extends UpetApiService {
   }
 
   // Actualizar una mascota
-  updatePet(petId: number, pet: PetSchemaPost): Observable<PetSchemaResponse> {
+  updatePet(petId: number, pet: PetSchemaRequest): Observable<PetSchemaResponse> {
     return this.http.put<PetSchemaResponse>(`${this.apiUrl}/${petId}`, pet).pipe(
       catchError(this.handleError)
     );
@@ -57,8 +57,5 @@ export class PetService extends UpetApiService {
     );
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('Error en la solicitud', error);
-    return throwError(() => error);   
-  }
+
 }

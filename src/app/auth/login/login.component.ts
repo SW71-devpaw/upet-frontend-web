@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { catchError, of } from 'rxjs';
-import { LoginRequest, LoginResponse } from '../../core/auth/schema/login.interface';
+import { LoginRequest } from '../../core/auth/schema/login.interface';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoginResponse } from '../../core/shared/login-response.interface';
 
 @Component({
   selector: 'app-login',

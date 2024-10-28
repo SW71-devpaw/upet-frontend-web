@@ -1,45 +1,44 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {PetResponse} from "../../interfaces/PetResponse";
-
-import {NgForOf} from "@angular/common";
-import {HomePetOwnerService} from "../../services/home-pet-owner.service";
-import {FormAddPetComponent} from "../form-add-pet/form-add-pet.component";
-import {DialogModule} from "primeng/dialog";
-import {TypeForm} from "../../interfaces/type-form.enum";
-import {PetCardComponent} from "../../../../../shared/components/pet-card/pet-card.component";
-import { PetsApiService } from '../../../../../core/networking/services/pets-api.service';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { PetResponse } from "../../interfaces/PetResponse";
+import { TypeForm } from "../../interfaces/type-form.enum";
+import { PetService } from '../../../../../core/Pet/services/pet.service';
+import { NgForOf } from '@angular/common';
+import { DialogModule } from 'primeng/dialog';
+import { PetCardComponent } from '../../../../../shared/components/pet-card/pet-card.component';
+import { FormAddPetComponent } from '../form-add-pet/form-add-pet.component';
+import { CommonModule } from '@angular/common';
+import { PetSchemaResponse } from '../../../../../core/Pet/schema/pet.interface';
 
 @Component({
   selector: 'app-list-owner-pets',
   standalone: true,
   imports: [
+    CommonModule,
     PetCardComponent,
     NgForOf,
     FormAddPetComponent,
     DialogModule
   ],
   templateUrl: './list-owner-pets.component.html',
-  styleUrl: './list-owner-pets.component.css'
+  styleUrls: ['./list-owner-pets.component.css']  // Aquí se corrige a 'styleUrls'
 })
 export class ListOwnerPetsComponent {
-  pets:PetResponse[] = [];
-  visibleAddPet:boolean = false;
+  pets: PetSchemaResponse[] = [];
+  visibleAddPet: boolean = false;
 
   constructor(
-    private petsApiService: PetsApiService,
-  ) {
-  }
+    private petsApiService: PetService,
+  ) {}
+
   ngOnInit() {
-    this.petsApiService.getMyPets(1).subscribe((data) => {
-      this.pets = data;
-    });
+    this.petsApiService.getPets();
   }
 
   openDialogAddPet() {
     this.visibleAddPet = true;
   }
 
-  closeDialogAddPet = () =>{
+  closeDialogAddPet = () => {
     this.visibleAddPet = false;
   }
 

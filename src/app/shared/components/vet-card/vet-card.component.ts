@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
-import { VetResponse } from '../../../core/networking/response/VetResponse';
+import { VeterinarianProfileSchemaResponse, VeterinarianSchemaResponse } from '../../../core/Veterinarian/schema/veterinarian.interface';
+import { VeterinaryClinicService } from '../../../core/VeterinaryClinic/services/veterinary-clinic.service';
+import { VeterinaryClinicSchemaGet } from '../../../core/VeterinaryClinic/schema/veterinary-clinic.interface';
 
 @Component({
   selector: 'app-vet-card',
@@ -9,5 +11,13 @@ import { VetResponse } from '../../../core/networking/response/VetResponse';
   styleUrl: './vet-card.component.css'
 })
 export class VetCardComponent {
-  @Input() vet!: VetResponse;
+  @Input() vet!: VeterinarianSchemaResponse;
+  clinic: VeterinaryClinicSchemaGet | undefined;
+
+  constructor(private vetClinicService: VeterinaryClinicService) {
+    this.vetClinicService.getVeterinaryClinicById(this.vet.clinicId).subscribe(clinic => {
+      this.clinic = clinic;
+    });
+  }
+  
 }
