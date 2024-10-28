@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
     FormAddPetComponent,
   ],
   templateUrl: './pet-card.component.html',
-  styleUrl: './pet-card.component.css'
+  styleUrls: ['./pet-card.component.css']  // Corregido aquí
 })
 export class PetCardComponent {
   constructor(private homePetOwnerService:HomePetOwnerService, private router:Router) {

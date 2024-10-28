@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import {DialogModule} from "primeng/dialog";
-import {FormAddPetComponent} from "../form-add-pet/form-add-pet.component";
 import {NgForOf} from "@angular/common";
-import {PetCardComponent} from "../../../../../shared/components/pet-card/pet-card.component";
+
 import {VetResponse} from "../../../../../core/networking/response/VetResponse";
 import {VetCardComponent} from "../../../../../shared/components/vet-card/vet-card.component";
 import {VetClinicsApiService} from "../../../../../core/networking/services/vet-clinics-api.service";
-
+import { PetCardComponent } from '../../../../../shared/components/pet-card/pet-card.component';
+import { FormAddPetComponent } from '../form-add-pet/form-add-pet.component';
 @Component({
   selector: 'app-list-scpecialists-nearby',
   standalone: true,
@@ -21,7 +21,7 @@ import {VetClinicsApiService} from "../../../../../core/networking/services/vet-
   styleUrl: './list-scpecialists-nearby.component.css'
 })
 export class ListScpecialistsNearbyComponent {
-  constructor(private vetClinicsApiService:VetClinicsApiService) {
+  constructor() {
   }
    veterinarians: VetResponse[] = [
     {

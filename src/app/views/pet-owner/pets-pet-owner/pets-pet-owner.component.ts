@@ -6,7 +6,7 @@ import {TypeForm} from "../home-pet-owner/interfaces/type-form.enum";
 import {NgForOf} from "@angular/common";
 import {PetCardComponent} from "../../../shared/components/pet-card/pet-card.component";
 import {DialogModule} from "primeng/dialog";
-import {FormAddPetComponent} from "../home-pet-owner/components/form-add-pet/form-add-pet.component";
+import { FormAddPetComponent } from '../home-pet-owner/components/form-add-pet/form-add-pet.component';
 
 @Component({
   selector: 'app-pets-pet-owner',
