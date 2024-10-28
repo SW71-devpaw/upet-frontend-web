@@ -1,0 +1,21 @@
+<div>
+  <google-map
+    [center]="center"
+    [zoom]="zoom"
+    mapId="map"
+  >
+    <map-marker
+      [title]="'My location'"
+      [position]="center"
+    >
+    </map-marker>
+
+    <map-marker
+      *ngFor="let marker of markers"
+      [title]="marker.name"
+      [position]="marker.coords"
+      [style]="'{color:black}'"
+    >
+    </map-marker>
+  </google-map>
+</div>
