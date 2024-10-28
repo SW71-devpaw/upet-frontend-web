@@ -18,7 +18,8 @@ import {VetClinicResponse} from "../../../../../core/networking/response/VetClin
     FormAddPetComponent,
     NgForOf,
     PetCardComponent,
-    VetCardComponent
+    VetCardComponent,
+    ClinicCardComponent
   ],
   templateUrl: './list-scpecialists-nearby.component.html',
   styleUrl: './list-scpecialists-nearby.component.css'

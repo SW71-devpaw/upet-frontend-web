@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { VetResponse } from '../../../core/networking/response/VetResponse';
+import {VeterinarianSchemaGet} from "../../../core/Veterinarian/schema/veterinarian.interface";
 
 @Component({
   selector: 'app-vet-card',
@@ -9,5 +10,7 @@ import { VetResponse } from '../../../core/networking/response/VetResponse';
   styleUrl: './vet-card.component.css'
 })
 export class VetCardComponent {
-  @Input() vet!: VetResponse;
+  @Input() vet!: VeterinarianSchemaGet;
+  constructor() {
+  }
 }

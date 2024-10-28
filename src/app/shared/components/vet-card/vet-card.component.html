@@ -1,31 +1,8 @@
-<div class="card-vet flex flex-row justify-content-between align-content-between px-4">
-    <div class="card-pet-content align-items-center">
-      <h2 class="card-pet-title truncate">{{vet.clinicName}}</h2>
-      <div class="card-pet-img-container flex align-content-center">
-        <img [src]="vet.image_url" alt="Golden retriever">
-      </div>
-      <h2 class="card-pet-title">{{vet.name}}</h2>
+<div class="vet-card">
+    <div class="img-container w-10rem h-7rem">
+      <img [src]="vet.image_url" [alt]="vet.name"/>
     </div>
-  <div class="flex flex-column align-content-between">
-    <div class="flex flex-row justify-content-around w-full">
-      <div>
-        <i class="pi pi-map-marker"></i> {{vet.distance}}
-      </div>
-      <div>
-        <i class="pi pi-star-fill"></i>{{vet.rate}}
-      </div>
+    <div>
+        {{vet.name}}
     </div>
-    <div class="flex flex-column justify-content-center align-items-center">
-      <p class="phone">{{vet.phoneNumber}}</p>
-      <p class="attention">{{vet.officeHoursStart}} -  {{vet.officeHoursEnd}}</p>
-    </div>
-    <div class="flex flex-row align-content-around mt-3 ">
-      <button class="secondary-button mr-4">
-        view
-      </button>
-      <button class="secondary-button">
-        date
-      </button>
-    </div>
-  </div>
 </div>

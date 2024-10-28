@@ -1,4 +1,6 @@
 // schemas/VeterinarianSchemaPost.ts
+import {ReviewSchemaGet} from "../../review/schema/review.interface";
+
 export interface VeterinarianSchemaPost {
   clinicName: string;
   otp_password: string;
