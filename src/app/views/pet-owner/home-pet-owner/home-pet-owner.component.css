@@ -5,6 +5,7 @@
 .home-owner-container {
   display: flex;
   height: 100vh;
+
 }
 
 .home-owner-content {
@@ -13,6 +14,3 @@
   padding: 20px;
 }
 
-app-sidebar {
-  top: 60px;
-}
