@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,19 @@ export class UpetApiService {
 
   protected buildUrl(endpoint: string): string {
     return `${this.baseUrl}/${endpoint}`;
+  }
+
+  protected handleError(error: HttpErrorResponse): Observable<never> {
+    // Customize the error handling logic as needed
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred.
+      errorMessage = `An error occurred: ${error.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      errorMessage = `Backend returned code ${error.status}, body was: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

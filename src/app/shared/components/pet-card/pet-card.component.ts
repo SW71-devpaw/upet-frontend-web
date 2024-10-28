@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import {PetResponse} from "../../../core/networking/response/PetResponse";
 import {HomePetOwnerService} from "../../../views/pet-owner/home-pet-owner/services/home-pet-owner.service";
 import {DialogModule} from "primeng/dialog";
 import {FormAddPetComponent} from "../../../views/pet-owner/home-pet-owner/components/form-add-pet/form-add-pet.component";
 import {TypeForm} from "../../../views/pet-owner/home-pet-owner/interfaces/type-form.enum";
 import {Router} from "@angular/router";
+import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
 
 @Component({
   selector: 'app-pet-card',
@@ -21,7 +21,7 @@ import {Router} from "@angular/router";
 export class PetCardComponent {
   constructor(private homePetOwnerService:HomePetOwnerService, private router:Router) {
   }
-  @Input() pet:PetResponse = {} as PetResponse;
+  @Input() pet: PetSchemaResponse = {} as PetSchemaResponse;
   visible = false;
 
   toProfile(){

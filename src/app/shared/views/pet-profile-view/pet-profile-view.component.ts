@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {PetResponse} from "../../../core/networking/response/PetResponse";
-import {PetsApiService} from "../../../core/networking/services/pets-api.service";
 import {DialogModule} from "primeng/dialog";
 import {
   FormAddPetComponent
@@ -14,7 +12,10 @@ import {MedicalResultsComponent} from "./components/medical-results/medical-resu
 import {DiseasesComponent} from "./components/diseases/diseases.component";
 import {SurgeriesComponent} from "./components/surgeries/surgeries.component";
 import {VaccinesComponent} from "./components/vaccines/vaccines.component";
-import {MedicalHistoriesApiService} from "../../../core/networking/services/medical-histories-api.service";
+import { MedicalHistoryBaseService } from '../../../core/MedicalHistory/services/shared/medical-history-base.service';
+import { PetService } from '../../../core/Pet/services/pet.service';
+import { PetResponse } from '../../../views/pet-owner/home-pet-owner/interfaces/PetResponse';
+import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
 
 @Component({
   selector: 'app-pet-profile-view',
@@ -35,7 +36,7 @@ import {MedicalHistoriesApiService} from "../../../core/networking/services/medi
 })
 export class PetProfileViewComponent {
 
-  pet: PetResponse | undefined;
+  pet: PetSchemaResponse | undefined;
   petId: number | undefined;
   historyId: number | undefined;
   visible = false;
@@ -43,8 +44,8 @@ export class PetProfileViewComponent {
 
   constructor(
     private router: ActivatedRoute,
-    private petsApiService: PetsApiService,
-    private historyApiService: MedicalHistoriesApiService
+    private petsApiService: PetService,
+    private historyApiService: MedicalHistoryBaseService
   ) {
     this.router.params.subscribe(params => {
       this.petId = params['id'];
@@ -54,11 +55,15 @@ export class PetProfileViewComponent {
   ngOnInit() {
     if (this.petId) {
       this.petsApiService.getPetById(this.petId).subscribe(pet => {
-        this.pet = pet;
+        this.pet = {
+          ...pet,
+          petOwnerId: pet.petOwnerId
+        };
         console.log({location: 'PetProfileViewComponent', pet});
       });
       this.historyApiService.getMedicalHistoryByPetId(this.petId).subscribe(history => {
         this.historyId = history.id;
+        console.log({location: 'PetProfileViewComponent', history});
       });
     }
   }

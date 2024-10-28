@@ -2,7 +2,7 @@ import { GenderEnum } from "../enum/gender.enum";
 import { SpecieEnum } from "../enum/specie.enum";
 
 // schemas/PetSchemaPost.ts
-export interface PetSchemaPost {
+export interface PetSchemaRequest {
   name: string;
   breed: string;
   species: SpecieEnum; // Asegúrate de definir este enum
@@ -24,3 +24,4 @@ export interface PetSchemaResponse {
   image_url: string;
   gender: GenderEnum; // Asegúrate de definir este enum
 }
+

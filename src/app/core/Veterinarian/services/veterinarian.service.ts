@@ -3,7 +3,7 @@ import { UpetApiService } from '../../Api/UpetBackend/upet-api.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { LoginResponse } from '../../shared/login-response.interface';
-import { VeterinarianSchemaPost, VeterinarianSchemaGet, VeterinarianProfileSchemaGet, VeterinarianUpdateInformation } from '../schema/veterinarian.interface';
+import { VeterinarianUpdateInformation, VeterinarianSchemaResponse, VeterinarianSchemaRequest, VeterinarianProfileSchemaResponse } from '../schema/veterinarian.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,43 +17,43 @@ export class VeterinarianService extends UpetApiService {
   }
 
   // Crear un veterinario
-  createVeterinarian(userId: number, veterinarian: VeterinarianSchemaPost): Observable<LoginResponse> {
+  createVeterinarian(userId: number, veterinarian: VeterinarianSchemaRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/${userId}`, veterinarian).pipe(
       catchError(this.handleError)
     );
   }
 
   // Obtener todos los veterinarios
-  getVeterinarians(): Observable<VeterinarianSchemaGet[]> {
-    return this.http.get<VeterinarianSchemaGet[]>(this.apiUrl).pipe(
+  getVeterinarians(): Observable<VeterinarianSchemaResponse[]> {
+    return this.http.get<VeterinarianSchemaResponse[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
   // Obtener un veterinario por ID de usuario
-  getVeterinarianByUserId(userId: number): Observable<VeterinarianSchemaGet> {
-    return this.http.get<VeterinarianSchemaGet>(`${this.apiUrl}/users/${userId}`).pipe(
+  getVeterinarianByUserId(userId: number): Observable<VeterinarianSchemaResponse> {
+    return this.http.get<VeterinarianSchemaResponse>(`${this.apiUrl}/users/${userId}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // Obtener un veterinario por ID
-  getVeterinarianById(vetId: number): Observable<VeterinarianSchemaGet> {
-    return this.http.get<VeterinarianSchemaGet>(`${this.apiUrl}/${vetId}`).pipe(
+  getVeterinarianById(vetId: number): Observable<VeterinarianSchemaResponse> {
+    return this.http.get<VeterinarianSchemaResponse>(`${this.apiUrl}/${vetId}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // Obtener veterinarios por ID de clínica
-  getVetsByClinicId(clinicId: number): Observable<VeterinarianSchemaGet[]> {
-    return this.http.get<VeterinarianSchemaGet[]>(`${this.apiUrl}/vets/${clinicId}`).pipe(
+  getVetsByClinicId(clinicId: number): Observable<VeterinarianSchemaResponse[]> {
+    return this.http.get<VeterinarianSchemaResponse[]>(`${this.apiUrl}/vets/${clinicId}`).pipe(
       catchError(this.handleError)
     );
   }
 
   // Obtener detalles de un veterinario
-  getVetByIdDetails(vetId: number): Observable<VeterinarianProfileSchemaGet> {
-    return this.http.get<VeterinarianProfileSchemaGet>(`${this.apiUrl}/reviews/${vetId}`).pipe(
+  getVetByIdDetails(vetId: number): Observable<VeterinarianProfileSchemaResponse> {
+    return this.http.get<VeterinarianProfileSchemaResponse>(`${this.apiUrl}/reviews/${vetId}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -66,14 +66,11 @@ export class VeterinarianService extends UpetApiService {
   }
 
   // Cambiar información de un veterinario
-  changeVetInformation(vetId: number, vetData: VeterinarianUpdateInformation): Observable<VeterinarianSchemaGet> {
-    return this.http.put<VeterinarianSchemaGet>(`${this.apiUrl}/${vetId}`, vetData).pipe(
+  changeVetInformation(vetId: number, vetData: VeterinarianUpdateInformation): Observable<VeterinarianSchemaResponse> {
+    return this.http.put<VeterinarianSchemaResponse>(`${this.apiUrl}/${vetId}`, vetData).pipe(
       catchError(this.handleError)
     );
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('Error en la solicitud', error);
-    return throwError(() => error);   
-  }
+
 }

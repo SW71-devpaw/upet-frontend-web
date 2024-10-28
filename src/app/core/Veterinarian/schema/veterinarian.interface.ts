@@ -1,5 +1,7 @@
+import { ReviewSchemaGet } from "../../review/schema/review.interface";
+
 // schemas/VeterinarianSchemaPost.ts
-export interface VeterinarianSchemaPost {
+export interface VeterinarianSchemaRequest {
   clinicName: string;
   otp_password: string;
 }
@@ -12,7 +14,7 @@ export interface VeterinarianUpdateInformation {
 }
 
 // schemas/VeterinarianSchemaGet.ts
-export interface VeterinarianSchemaGet {
+export interface VeterinarianSchemaResponse {
   id: number;
   name: string;
   clinicId: number;
@@ -23,7 +25,7 @@ export interface VeterinarianSchemaGet {
 }
 
 // schemas/VeterinarianProfileSchemaGet.ts
-export interface VeterinarianProfileSchemaGet {
+export interface VeterinarianProfileSchemaResponse {
   id: number;
   name: string;
   image_url: string;
