@@ -7,6 +7,7 @@ import {FormAddPetComponent} from "../form-add-pet/form-add-pet.component";
 import {DialogModule} from "primeng/dialog";
 import {TypeForm} from "../../interfaces/type-form.enum";
 import {PetsApiService} from "../../../../../core/networking/services/pets-api.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-owner-pets',
@@ -26,6 +27,7 @@ export class ListOwnerPetsComponent {
 
   constructor(
     private petsApiService: PetsApiService,
+    private router:Router
   ) {
   }
   ngOnInit() {
@@ -41,6 +43,8 @@ export class ListOwnerPetsComponent {
   closeDialogAddPet = () =>{
     this.visibleAddPet = false;
   }
-
+  redirectToAllPets() {
+    this.router.navigate(['/pet-owner/pets']).then(r => r);
+  }
   protected readonly TypeForm = TypeForm;
 }

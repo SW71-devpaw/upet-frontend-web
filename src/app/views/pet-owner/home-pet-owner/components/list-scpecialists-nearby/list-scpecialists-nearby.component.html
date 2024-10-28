@@ -2,10 +2,10 @@
   <div class="header">
     <div class="title">Best Specialists Nearby</div>
     <div class="view-all">
-      <button class="btn-primary" >+ View all</button>
+      <button class="btn-primary" (click)="redirectToAllClinics()">+ View all</button>
     </div>
   </div>
-    <div class="vets-wrapper">
-      <app-vet-card *ngFor="let vet of veterinarians" [vet]="vet" ></app-vet-card>
-    </div>
+  <div class="vets-wrapper">
+    <app-clinic-card *ngFor="let clinic of veterinarians" [clinic]="clinic" ></app-clinic-card>
+  </div>
 </div>
