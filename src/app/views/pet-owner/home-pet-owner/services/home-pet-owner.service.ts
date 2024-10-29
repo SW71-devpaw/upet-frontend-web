@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PetResponse} from "../../../../core/networking/response/PetResponse";
 import {Observable} from "rxjs";
+import { PetSchemaResponse } from '../../../../core/Pet/schema/pet.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,10 @@ export class HomePetOwnerService {
 
    constructor(private http:HttpClient) {}
 
-   getMyPets(petOwnerId:number):Observable<PetResponse[]>{
+   getMyPets(petOwnerId:number):Observable<PetSchemaResponse[]>{
     const resource = `/api/v1/pets/${petOwnerId}`;
-    let pets:PetResponse[] = [];
-    return this.http.get<PetResponse[]>(`${this.basePath}${resource}`);
+    let pets:PetSchemaResponse[] = [];
+    return this.http.get<PetSchemaResponse[]>(`${this.basePath}${resource}`);
   }
 
   deletePet(petId:number){

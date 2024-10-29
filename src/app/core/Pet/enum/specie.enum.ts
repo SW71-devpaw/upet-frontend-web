@@ -1,5 +1,5 @@
 // Ejemplo de definición de un enum para SubscriptionType, ajusta según sea necesario
-export enum Specie {
+export enum SpecieEnum{
     Dog = "Dog",
     Cat = "Cat",
     Bird = "Bird",

@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
-import {UpetApiService} from "../../Api/UpetBackend/upet-api.service";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {ReviewSchemaGet, ReviewSchemaPost} from "../schema/review.interface";
+import { UpetApiService } from '../../Api/UpetBackend/upet-api.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
+import { ReviewSchemaPost, ReviewSchemaGet } from '../schema/review.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService extends UpetApiService {
-  apiUrl: string;
+  private apiUrl: string;
 
   constructor(http: HttpClient) {
     super(http);
-    this.apiUrl = this.buildUrl('reviews');
+    this.apiUrl = this.buildUrl('reviews'); // Cambiar a reviews
   }
 
-  getAllReviews():Observable<ReviewSchemaGet[]>{
-    return this.http.get<ReviewSchemaGet[]>(this.apiUrl);
+  // Crear una reseña
+  createReview(petOwnerId: number, review: ReviewSchemaPost): Observable<ReviewSchemaGet> {
+    return this.http.post<ReviewSchemaGet>(`${this.apiUrl}/${petOwnerId}`, review).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  createReview(reviewData: ReviewSchemaPost, petOwnerId:number): Observable<ReviewSchemaGet> {
-    return this.http.post<ReviewSchemaGet>(`${this.apiUrl}/${petOwnerId}`, reviewData);
+  // Obtener todas las reseñas
+  getReviews(): Observable<ReviewSchemaGet[]> {
+    return this.http.get<ReviewSchemaGet[]>(this.apiUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  override handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('Error en la solicitud', error);
+    return throwError(() => error);
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input} from '@angular/core';
+import {Component, ElementRef, Inject, Input} from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
@@ -11,13 +11,13 @@ import { ToastModule } from 'primeng/toast';
 import { FileUploadModule } from 'primeng/fileupload';
 import { NgIf } from '@angular/common';
 import { MessageService } from 'primeng/api';
-import { PetsApiService } from '../../../../../core/networking/services/pets-api.service';
 import { formatDateToYYYYMMDD } from '../../../../../shared/helpers/date.formater';
 import { UploadService } from '../../../../../shared/service/upload.service';
 import { Gender } from '../../interfaces/Gender';
 import { PetResponse } from '../../interfaces/PetResponse';
 import { TypeForm } from '../../interfaces/type-form.enum';
-
+import { PetService } from '../../../../../core/Pet/services/pet.service';
+import { PetSchemaRequest, PetSchemaResponse } from '../../../../../core/Pet/schema/pet.interface';
 
 @Component({
   selector: 'app-form-add-pet',
@@ -37,18 +37,19 @@ import { TypeForm } from '../../interfaces/type-form.enum';
     NgIf,
   ],
   templateUrl: './form-add-pet.component.html',
-  styleUrl: './form-add-pet.component.css'
+  styleUrls: ['./form-add-pet.component.css']
 })
 export class FormAddPetComponent {
   @Input() closeDialog!:()=>void;
   @Input() mode!:TypeForm;
-  @Input() pet:PetResponse|undefined;
+  @Input() pet: PetSchemaResponse|undefined;
 
   myForm:FormGroup;
   imageUrl: string | ArrayBuffer | null | undefined = null;
   genders!: Gender [];
   buttonTitle:string = "";
 
+  
   ngOnInit() {
     console.log({location:"Form edit pet",pet:this.pet});
     this.genders = [
@@ -69,17 +70,20 @@ export class FormAddPetComponent {
     this.buttonTitle = this.mode === TypeForm.ADD ? "Add" : "Edit";
   }
   constructor(
-    private fb:FormBuilder,
+    @Inject(FormBuilder) private fb: FormBuilder,
     private messageService: MessageService,
     private uploadService: UploadService,
-    private petsApiService: PetsApiService
+    private petsApiService: PetService
   ) {
+
+
+
     this.myForm = this.fb.group<PetResponse>({
       name: "",
       breed: "",
       species: "",
       image_url: "",
-      gender: undefined,
+      gender: "",
       weight: undefined,
       birthdate: undefined
     })
@@ -104,7 +108,7 @@ export class FormAddPetComponent {
     }
   }
   submitForm(){
-    const petRequest:PetResponse = {
+    const petRequest:PetSchemaRequest = {
       ...this.myForm.value,
       birthdate: formatDateToYYYYMMDD(this.myForm.value["birthdate"]),
       gender: this.myForm.value.gender["name"],
@@ -112,11 +116,11 @@ export class FormAddPetComponent {
     };
     console.log({petRequest});
     if(this.mode === TypeForm.ADD){
-    this.petsApiService.createPet(petRequest,1).subscribe(data=>{
+    this.petsApiService.createPet(1, petRequest).subscribe(data=>{
       alert("Pet created successfully");
     });}
     else{
-      this.petsApiService.updatePet(petRequest,this.pet!.id!).subscribe(data=>{
+      this.petsApiService.updatePet(this.pet!.id as number, petRequest).subscribe(data=>{
         alert("Pet updated successfully");
         window.location.reload();
       });

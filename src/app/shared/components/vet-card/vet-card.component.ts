@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
-import { VetResponse } from '../../../core/networking/response/VetResponse';
-import {VeterinarianSchemaGet} from "../../../core/Veterinarian/schema/veterinarian.interface";
+import { VeterinarianProfileSchemaResponse, VeterinarianSchemaResponse } from '../../../core/Veterinarian/schema/veterinarian.interface';
+import { VeterinaryClinicService } from '../../../core/VeterinaryClinic/services/veterinary-clinic.service';
+import { VeterinaryClinicSchemaGet } from '../../../core/VeterinaryClinic/schema/veterinary-clinic.interface';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -11,10 +12,11 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './vet-card.component.css'
 })
 export class VetCardComponent {
-  @Input() vet!: VeterinarianSchemaGet;
-  constructor(private router:Router, private activateRoute:ActivatedRoute) {
-  }
+  @Input() vet!: VeterinarianSchemaResponse;
+
+  constructor(private router:Router,private vetClinicService: VeterinaryClinicService, private activateRoute:ActivatedRoute) {}
   navigateToVetProfile() {
     this.router.navigate([this.vet.id], {relativeTo: this.activateRoute}).then(p=>p);
   }
+
 }
