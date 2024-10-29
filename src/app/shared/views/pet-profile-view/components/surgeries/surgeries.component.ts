@@ -7,10 +7,10 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {NgForOf} from "@angular/common";
 import {PaginatorModule} from "primeng/paginator";
-import {MedicalHistoriesApiService} from "../../../../../core/networking/services/medical-histories-api.service";
-import {SurgeryResponse} from "../../../../../core/networking/response/SurgeryResponse";
-import {SurgeryRequest} from "../../../../../core/networking/request/SurgeryRequest";
 import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
+import { SurgerySchemaRequest, SurgerySchemaResponse } from '../../../../../core/MedicalHistory/schema/surgery.interface';
+import { MedicalHistoryBaseService } from '../../../../../core/MedicalHistory/services/shared/medical-history-base.service';
+import { SurgerieService } from '../../../../../core/MedicalHistory/services/Surgeries/surgerie.service';
 
 @Component({
   selector: 'app-surgeries',
@@ -30,18 +30,21 @@ import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
   styleUrl: './surgeries.component.css'
 })
 export class SurgeriesComponent {
-  surgeries:SurgeryResponse[] = [];
+  surgeries:SurgerySchemaResponse[] = [];
   @Input() medicalHistoryId: number | undefined;
   myForm:FormGroup = new FormGroup({});
+  surgerieService: any;
 
   constructor(
-    private medicalService:MedicalHistoriesApiService,
+    private medicalService:MedicalHistoryBaseService,
     private fb: FormBuilder
   ) {
   }
   ngOnInit() {
-    this.medicalService.getSurgeriesByMedicalHistoryId(this.medicalHistoryId!)
-      .subscribe(results => {
+    this.surgerieService = SurgerieService;
+
+    this.surgerieService.getSurgeriesByMedicalHistoryId(this.medicalHistoryId!)
+      .subscribe((results: SurgerySchemaResponse[]) => {
         this.surgeries = results.reverse();
       });
     this.myForm = this.fb.group({
@@ -50,13 +53,12 @@ export class SurgeriesComponent {
     });
   }
   submit(){
-    let request:SurgeryRequest = {
+    let request:SurgerySchemaRequest = {
       surgeryDate: formatDateToYYYYMMDD(this.myForm.value.surgeryDate),
       description: this.myForm.value.description,
       medicalHistoryId: this.medicalHistoryId!
     }
-    this.medicalService.createSurgery(request, this.medicalHistoryId!)
-      .subscribe(() => {
+    this.surgerieService.createSurgery(request, this.medicalHistoryId!)?.subscribe(() => {
         alert('Surgery created successfully');
         window.location.reload();
       });

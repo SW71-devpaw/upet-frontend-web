@@ -1,7 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {SurgeryResponse} from "../../../../../core/networking/response/SurgeryResponse";
-import {MedicalHistoriesApiService} from "../../../../../core/networking/services/medical-histories-api.service";
-import {VaccineResponse} from "../../../../../core/networking/response/VaccineResponse";
 import {Button} from "primeng/button";
 import {CalendarModule} from "primeng/calendar";
 import {DividerModule} from "primeng/divider";
@@ -10,8 +7,10 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {NgForOf} from "@angular/common";
 import {PaginatorModule} from "primeng/paginator";
-import {VaccineRequest} from "../../../../../core/networking/request/VaccineRequest";
 import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
+import { VaccineSchemaRequest, VaccineSchemaResponse } from '../../../../../core/MedicalHistory/schema/vaccine.interface';
+import { MedicalHistoryBaseService } from '../../../../../core/MedicalHistory/services/shared/medical-history-base.service';
+import { VaccineService } from '../../../../../core/MedicalHistory/services/Vaccines/vaccine.service';
 
 @Component({
   selector: 'app-vaccines',
@@ -31,17 +30,20 @@ import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
   styleUrl: './vaccines.component.css'
 })
 export class VaccinesComponent {
-  vaccines:VaccineResponse[] = [];
+  vaccines:VaccineSchemaResponse[] = [];
   @Input() medicalHistoryId: number | undefined;
   myForm:FormGroup = new FormGroup({});
+  vaccineService: any;
   constructor(
-    private medicalService:MedicalHistoriesApiService,
+    private medicalService: MedicalHistoryBaseService,
     private fb:FormBuilder
   ) {
   }
   ngOnInit() {
-    this.medicalService.getVaccinesByMedicalHistoryId(this.medicalHistoryId!)
-      .subscribe(results => {
+    this.vaccineService = VaccineService;
+
+    this.vaccineService.getVaccinesByMedicalHistoryId(this.medicalHistoryId!)
+      .subscribe((results: VaccineSchemaResponse[]) => {
         this.vaccines = results.reverse();
       });
     this.myForm = this.fb.group({
@@ -54,7 +56,7 @@ export class VaccinesComponent {
   }
 
   submit(){
-    let request:VaccineRequest = {
+    let request:VaccineSchemaRequest = {
       name : this.myForm.value.name,
       vaccineDate : formatDateToYYYYMMDD(this.myForm.value.vaccineDate),
       vaccineType : this.myForm.value.vaccineType,
@@ -62,7 +64,10 @@ export class VaccinesComponent {
       location : this.myForm.value.location,
       medicalHistoryId : this.medicalHistoryId!
     }
-    this.medicalService.createVaccine(request, this.medicalHistoryId!)
+    this.vaccineService.createVaccine(
+      request,
+      this.medicalHistoryId!
+    )
       .subscribe(() => {
           alert('Vaccine created successfully');
           window.location.reload();

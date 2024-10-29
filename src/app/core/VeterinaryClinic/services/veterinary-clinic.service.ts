@@ -43,8 +43,5 @@ export class VeterinaryClinicService extends UpetApiService {
     );
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('Error en la solicitud', error);
-    return throwError(() => error);   
-  }
+
 }
