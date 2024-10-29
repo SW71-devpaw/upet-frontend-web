@@ -5,3 +5,11 @@
 .btn-primary:hover {
   @apply bg-blue-900 text-white;
 }
+
+.pets-container{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    justify-items:center;
+    align-items:center;
+}

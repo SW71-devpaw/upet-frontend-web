@@ -22,6 +22,7 @@ export class SidebarComponent {
   options = [
     { label: 'Home', icon: 'pi pi-home', link: '/pet-owner/home' },
     { label: 'Pets', icon: 'pi pi-wifi', link: '/pet-owner/pets' },
+    {label: 'Clinics', icon:'pi pi-building', link: '/pet-owner/clinics'},
     { label: 'Care', icon: 'pi pi-calendar', link: '/pet-owner/care' },
     { label: 'Configuration', icon: 'pi pi-cog', link: '/pet-owner/home' },
     { label: 'Notifications', icon: 'pi pi-bell', link: '/pet-owner/home' },

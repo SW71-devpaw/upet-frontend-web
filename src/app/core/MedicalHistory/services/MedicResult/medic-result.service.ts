@@ -8,7 +8,7 @@ import { MedicalHistorySchemaRequest, MedicalHistorySchemaResponse } from '../..
   providedIn: 'root'
 })
 export class MedicResultService extends UpetApiService {
-  private apiUrl: string;
+  protected apiUrl: string;
 
   constructor(http: HttpClient) {
     super(http);

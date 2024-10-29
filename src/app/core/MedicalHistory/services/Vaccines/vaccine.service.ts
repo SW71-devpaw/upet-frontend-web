@@ -17,12 +17,12 @@ export class VaccineService extends UpetApiService {
   }
 
   addVaccine(request: VaccineSchemaRequest, medicalHistoryId: number): Observable<VaccineSchemaResponse> {
-    return this.http.post<VaccineSchemaResponse>(`${this.apiUrl}/${medicalHistoryId}/diseases`, request)
+    return this.http.post<VaccineSchemaResponse>(`${this.apiUrl}/${medicalHistoryId}/vaccines`, request)
       .pipe(catchError((error) => this.handleError(error)));
   }
 
   getAllVaccines(medicalHistoryId: number): Observable<VaccineSchemaResponse[]> {
-    return this.http.get<VaccineSchemaResponse[]>(`${this.apiUrl}/${medicalHistoryId}/diseases`)
+    return this.http.get<VaccineSchemaResponse[]>(`${this.apiUrl}/${medicalHistoryId}/vaccines`)
       .pipe(catchError((error) => this.handleError(error)));
   }
 }

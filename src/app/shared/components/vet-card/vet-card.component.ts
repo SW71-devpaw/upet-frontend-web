@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import { VeterinarianProfileSchemaResponse, VeterinarianSchemaResponse } from '../../../core/Veterinarian/schema/veterinarian.interface';
 import { VeterinaryClinicService } from '../../../core/VeterinaryClinic/services/veterinary-clinic.service';
 import { VeterinaryClinicSchemaGet } from '../../../core/VeterinaryClinic/schema/veterinary-clinic.interface';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-vet-card',
@@ -12,12 +13,10 @@ import { VeterinaryClinicSchemaGet } from '../../../core/VeterinaryClinic/schema
 })
 export class VetCardComponent {
   @Input() vet!: VeterinarianSchemaResponse;
-  clinic: VeterinaryClinicSchemaGet | undefined;
 
-  constructor(private vetClinicService: VeterinaryClinicService) {
-    this.vetClinicService.getVeterinaryClinicById(this.vet.clinicId).subscribe(clinic => {
-      this.clinic = clinic;
-    });
+  constructor(private router:Router,private vetClinicService: VeterinaryClinicService, private activateRoute:ActivatedRoute) {}
+  navigateToVetProfile() {
+    this.router.navigate([this.vet.id], {relativeTo: this.activateRoute}).then(p=>p);
   }
-  
+
 }

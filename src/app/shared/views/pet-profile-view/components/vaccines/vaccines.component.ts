@@ -33,19 +33,19 @@ export class VaccinesComponent {
   vaccines:VaccineSchemaResponse[] = [];
   @Input() medicalHistoryId: number | undefined;
   myForm:FormGroup = new FormGroup({});
-  vaccineService: any;
   constructor(
-    private medicalService: MedicalHistoryBaseService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private vaccineService:VaccineService
   ) {
   }
   ngOnInit() {
-    this.vaccineService = VaccineService;
 
-    this.vaccineService.getVaccinesByMedicalHistoryId(this.medicalHistoryId!)
+    this.vaccineService.getAllVaccines(this.medicalHistoryId!)
       .subscribe((results: VaccineSchemaResponse[]) => {
         this.vaccines = results.reverse();
+        console.log({vaccines:results})
       });
+
     this.myForm = this.fb.group({
       name: [''],
       vaccineDate: [new Date()],
@@ -64,7 +64,7 @@ export class VaccinesComponent {
       location : this.myForm.value.location,
       medicalHistoryId : this.medicalHistoryId!
     }
-    this.vaccineService.createVaccine(
+    this.vaccineService.addVaccine(
       request,
       this.medicalHistoryId!
     )

@@ -5,7 +5,7 @@ import { catchError, of } from 'rxjs';
 import { LoginRequest } from '../../core/auth/schema/login.interface';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LoginResponse } from '../../core/shared/login-response.interface';
+import {LoginResponse} from "../../core/shared/login-response.interface";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { LoginResponse } from '../../core/shared/login-response.interface';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  
+
   email: string = '';
   password: string = '';
   errorMessage: string | null = null;
@@ -35,7 +35,7 @@ export class LoginComponent {
     ).subscribe((response: LoginResponse | null) => {
       if (response) {
         console.log('Login successful', response);
-        this.router.navigate(['/pet-owner/home']); 
+        this.router.navigate(['/pet-owner/home']);
       }
     });
   }

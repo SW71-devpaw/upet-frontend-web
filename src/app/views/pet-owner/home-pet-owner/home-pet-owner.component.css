@@ -4,12 +4,9 @@
 
 .home-owner-container {
   display: flex;
-  height: 100vh;
-
 }
 
 .home-owner-content {
-  margin-left: 16rem;
   flex-grow: 1;
   padding: 20px;
 }

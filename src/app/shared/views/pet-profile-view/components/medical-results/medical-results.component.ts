@@ -29,16 +29,14 @@ export class MedicalResultsComponent {
   medicalResults: MedicalHistorySchemaResponse[] = []
   @Input() medicalHistoryId: number | undefined;
   myForm:FormGroup = new FormGroup({});
-  resultService: any;
   constructor(
-    private medicalService:MedicalHistoryBaseService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private resultService:MedicResultService
   ) {
   }
   ngOnInit() {
-      this.resultService = MedicResultService; 
 
-      this.resultService.getMedicalResultsByMedicalHistoryId(this.medicalHistoryId!)
+      this.resultService.getAllMedicalHistories(this.medicalHistoryId!)
         .subscribe((results: MedicalHistorySchemaResponse[]) => {
           this.medicalResults = results.reverse();
         });
@@ -57,7 +55,7 @@ export class MedicalResultsComponent {
       resultType: this.myForm.value.resultType,
       description: this.myForm.value.description
     }
-    this.resultService.createMedicalHistory(request)
+    this.resultService.createMedicalHistory(request, this.medicalHistoryId!)
       .subscribe(() => {
         alert('Medical result created successfully');
         window.location.reload();

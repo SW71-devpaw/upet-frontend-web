@@ -24,4 +24,3 @@ export interface PetSchemaResponse {
   image_url: string;
   gender: GenderEnum; // Asegúrate de definir este enum
 }
-
