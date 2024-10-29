@@ -33,17 +33,15 @@ export class SurgeriesComponent {
   surgeries:SurgerySchemaResponse[] = [];
   @Input() medicalHistoryId: number | undefined;
   myForm:FormGroup = new FormGroup({});
-  surgerieService: any;
 
   constructor(
-    private medicalService:MedicalHistoryBaseService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private surgerieService: SurgerieService
   ) {
   }
   ngOnInit() {
-    this.surgerieService = SurgerieService;
 
-    this.surgerieService.getSurgeriesByMedicalHistoryId(this.medicalHistoryId!)
+    this.surgerieService.getAllSurgeries(this.medicalHistoryId!)
       .subscribe((results: SurgerySchemaResponse[]) => {
         this.surgeries = results.reverse();
       });
@@ -58,7 +56,7 @@ export class SurgeriesComponent {
       description: this.myForm.value.description,
       medicalHistoryId: this.medicalHistoryId!
     }
-    this.surgerieService.createSurgery(request, this.medicalHistoryId!)?.subscribe(() => {
+    this.surgerieService.addSurgery(request, this.medicalHistoryId!)?.subscribe(() => {
         alert('Surgery created successfully');
         window.location.reload();
       });

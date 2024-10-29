@@ -8,6 +8,8 @@ import { VeterinarianProfileSchemaResponse, VeterinarianSchemaResponse } from '.
 import { VeterinarianService } from '../../../../../core/Veterinarian/services/veterinarian.service';
 import {ClinicCardComponent} from "../../../../../shared/components/clinic-card/clinic-card.component";
 import {Router} from "@angular/router";
+import {VeterinaryClinicService} from "../../../../../core/VeterinaryClinic/services/veterinary-clinic.service";
+import {VetClinicResponse} from "../../../../../core/networking/response/VetClinicResponse";
 
 @Component({
   selector: 'app-list-scpecialists-nearby',
@@ -24,25 +26,17 @@ import {Router} from "@angular/router";
   styleUrl: './list-scpecialists-nearby.component.css'
 })
 export class ListScpecialistsNearbyComponent {
-  vetService: VeterinarianService;
-  veterinarians : VeterinarianSchemaResponse[] = [];
+  clinics : VetClinicResponse[] = [];
 
   constructor(
-    private veterinarianService: VeterinarianService,
+    private clinicService: VeterinaryClinicService,
     private router:Router
 
   ) {
 
-    this.vetService = veterinarianService;
-    veterinarianService.getVeterinarians().subscribe((data: VeterinarianSchemaResponse[]) => {
-      this.veterinarians = data.map(vet => ({
-        ...vet,
-        clinicName: '',
-        workingHourStart: '',
-        workingHourEnd: '',
-        clinicAddress: '',
-        reviews: []
-      }));
+    this.clinicService = clinicService;
+    clinicService.getVeterinaryClinics().subscribe((data: VetClinicResponse[]) => {
+      this.clinics = data;
     });
   }
 

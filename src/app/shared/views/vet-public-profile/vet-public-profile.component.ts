@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {VeterinarianSchemaGet} from "../../../core/Veterinarian/schema/veterinarian.interface";
 import {VeterinarianService} from "../../../core/Veterinarian/services/veterinarian.service";
 import {ActivatedRoute} from "@angular/router";
 import {activate} from "@angular/fire/remote-config";
@@ -13,6 +12,7 @@ import {
   FormAddPetComponent
 } from "../../../views/pet-owner/home-pet-owner/components/form-add-pet/form-add-pet.component";
 import {TypeForm} from "../../../views/pet-owner/home-pet-owner/interfaces/type-form.enum";
+import {VeterinarianSchemaResponse} from "../../../core/Veterinarian/schema/veterinarian.interface";
 
 @Component({
   selector: 'app-vet-public-profile',
@@ -28,7 +28,7 @@ import {TypeForm} from "../../../views/pet-owner/home-pet-owner/interfaces/type-
   styleUrl: './vet-public-profile.component.css'
 })
 export class VetPublicProfileComponent {
-    vet:VeterinarianSchemaGet = {} as VeterinarianSchemaGet;
+    vet:VeterinarianSchemaResponse = {} as VeterinarianSchemaResponse;
     clinic:VeterinaryClinicSchemaGet = {} as VeterinaryClinicSchemaGet;
     formVisible: boolean = false;
 
@@ -40,7 +40,7 @@ export class VetPublicProfileComponent {
     }
     ngOnInit() {
       let vetId: string = this.activatedRoute.snapshot.params["vetId"];
-      this.veterinarianService.getVeterinarianById(+vetId).subscribe((data: VeterinarianSchemaGet) => {
+      this.veterinarianService.getVeterinarianById(+vetId).subscribe((data: VeterinarianSchemaResponse) => {
         this.vet = data;
         this.veterinaryClinicService.getVeterinaryClinicById(this.vet.clinicId).subscribe((data: VeterinaryClinicSchemaGet) => {
           this.clinic = data;

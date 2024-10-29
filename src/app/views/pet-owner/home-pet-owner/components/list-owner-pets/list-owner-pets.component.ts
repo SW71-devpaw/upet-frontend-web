@@ -34,7 +34,7 @@ export class ListOwnerPetsComponent {
   }
 
   ngOnInit() {
-    this.petsApiService.getPets().subscribe((data) => {
+    this.petsApiService.getPetsByOwner(1).subscribe((data) => {
       this.pets = data;
     });
   }

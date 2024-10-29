@@ -34,10 +34,11 @@ export class DiseasesComponent implements OnInit {
 
   myForm: FormGroup;
 
-  diseaseService: any;
-  medicalHistoryId: any;
+  @Input() medicalHistoryId!: number;
 
-  constructor(private medicalService: MedicalHistoryBaseService) {
+  constructor(
+    private diseaseService:DiseasesService
+  ) {
     // Usando FormGroup y FormControl directamente
     this.myForm = new FormGroup({
       name: new FormControl(''),
@@ -47,7 +48,9 @@ export class DiseasesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.diseaseService = DiseasesService;
+    this.diseaseService.getAllDiseases(this.medicalHistoryId).subscribe((results: DiseaseSchemaResponse[]) => {
+      this.diseases = results.reverse();
+    });
   }
 
   submit() {

@@ -4,8 +4,8 @@ import {VeterinaryClinicSchemaGet} from "../../../core/VeterinaryClinic/schema/v
 import {ActivatedRoute} from "@angular/router";
 import {JsonPipe, NgForOf} from "@angular/common";
 import {VetCardComponent} from "../../components/vet-card/vet-card.component";
-import {VeterinarianSchemaGet} from "../../../core/Veterinarian/schema/veterinarian.interface";
 import {VeterinarianService} from "../../../core/Veterinarian/services/veterinarian.service";
+import {VeterinarianSchemaResponse} from "../../../core/Veterinarian/schema/veterinarian.interface";
 
 @Component({
   selector: 'app-clinic-profile',
@@ -20,7 +20,7 @@ import {VeterinarianService} from "../../../core/Veterinarian/services/veterinar
 })
 export class ClinicProfileComponent {
   clinic:VeterinaryClinicSchemaGet = {} as VeterinaryClinicSchemaGet;
-  vets:VeterinarianSchemaGet[] = [];
+  vets:VeterinarianSchemaResponse[] = [];
 
   constructor(
     private veterinayClinicService:VeterinaryClinicService,

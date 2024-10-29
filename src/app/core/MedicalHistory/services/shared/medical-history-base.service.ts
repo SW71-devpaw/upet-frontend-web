@@ -7,10 +7,13 @@ import { MedicResultService } from '../MedicResult/medic-result.service';
 import { MedicalHistorySchemaRequest, MedicalHistorySchemaResponse } from '../../schema/medical-result.interface';
 import { Observable } from 'rxjs';
 import { DiseaseSchemaRequest } from '../../schema/disease.interface';
+import {Injectable} from "@angular/core";
 
 
 
-
+@Injectable({
+  providedIn: 'root'
+})
 export class MedicalHistoryBaseService extends UpetApiService {
 
   protected apiUrl: string;
@@ -40,7 +43,7 @@ export class MedicalHistoryBaseService extends UpetApiService {
 
 
 
- 
+
 
 
 
