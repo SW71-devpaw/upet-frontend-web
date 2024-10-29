@@ -1,9 +1,7 @@
 <app-nav-bar></app-nav-bar>
-<app-sidebar (sidebarToggle)="onSidebarToggle($event)"></app-sidebar>
-
 <div class="flex mt-16">
-  <div [ngClass]="{'ml-20': isSidebarCollapsed, 'ml-64': !isSidebarCollapsed}"
-       class="transition-width flex duration-300">
-    <router-outlet class=" ml-10 h-full"/>
+  <app-sidebar (sidebarToggle)="onSidebarToggle($event)" ></app-sidebar>
+  <div [ngClass]="{'pet-layout-full-screen': isSidebarCollapsed, 'w-4/5': !isSidebarCollapsed}" class="transition-width duration-300">
+    <router-outlet class="view h-full"></router-outlet>
   </div>
 </div>

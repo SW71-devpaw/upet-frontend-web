@@ -1,13 +1,17 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {GoogleMap, MapAdvancedMarker, MapInfoWindow, MapMarker} from "@angular/google-maps";
 import {MapMarkerCustom} from "./interfaces/MapMarkerCustom";
+import {NgForOf} from "@angular/common";
+import {Button} from "primeng/button";
 
 @Component({
   selector: 'app-custom-map',
   standalone: true,
   imports: [
     GoogleMap,
-    MapMarker
+    MapMarker,
+    NgForOf,
+    Button
   ],
   templateUrl: './custom-map.component.html',
   styleUrl: './custom-map.component.css'
@@ -17,7 +21,7 @@ export class CustomMapComponent {
   @Input() markers: MapMarkerCustom[] = [];
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   center:google.maps.LatLngLiteral = {lat: 51.678418, lng: 7.809007};
-  zoom:number = 15;
+  zoom:number = 20;
   constructor() {}
 
   ngOnInit(){
@@ -36,6 +40,7 @@ export class CustomMapComponent {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        this.zoom = 20;
       });
     }
   }

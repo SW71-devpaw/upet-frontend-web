@@ -14,8 +14,8 @@
       *ngFor="let marker of markers"
       [title]="marker.name"
       [position]="marker.coords"
-      [style]="'{color:black}'"
     >
     </map-marker>
   </google-map>
+  <p-button (click)="myLocation()">My location</p-button>
 </div>
