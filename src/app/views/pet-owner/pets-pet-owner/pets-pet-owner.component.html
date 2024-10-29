@@ -1,9 +1,14 @@
 <div class="flex flex-col items-center justify-center p-5 w-full h-full ">
   <h1 class="text-2xl font-bold mb-4">My pets</h1>
   <div class="flex items-end justify-end w-full mb-4">
-    <button class="btn-primary">+Add pet</button>
+    <button class="btn-primary" (click)="openDialogAddPet()">+Add pet</button>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+
+<!--  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">-->
+<!--    <app-pet-card *ngFor="let pet of pets" [pet]="pet"></app-pet-card>-->
+<!--  </div>-->
+
+  <div class="pets-container w-full">
     <app-pet-card *ngFor="let pet of pets" [pet]="pet"></app-pet-card>
   </div>
 </div>
