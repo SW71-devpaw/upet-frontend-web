@@ -35,6 +35,8 @@ export class LoginComponent {
     ).subscribe((response: LoginResponse | null) => {
       if (response) {
         console.log('Login successful', response);
+        const token = response.access_token;
+        this.authService.storeToken(token);
         this.router.navigate(['/pet-owner/home']);
       }
     });
