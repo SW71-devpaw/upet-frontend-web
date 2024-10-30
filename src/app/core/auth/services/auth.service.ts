@@ -12,6 +12,12 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService extends UpetApiService{
+  static decodeToken(): DecodedToken {
+      throw new Error('Method not implemented.');
+  }
+  static storeToken(token: String) {
+      throw new Error('Method not implemented.');
+  }
   private apiUrl: string;
 
   constructor(http: HttpClient) {

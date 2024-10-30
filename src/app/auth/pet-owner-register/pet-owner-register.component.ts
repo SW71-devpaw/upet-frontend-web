@@ -4,6 +4,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PetOwnerService } from '../../core/PetOwner/services/pet-owner.service';
 import { PetOwnerSchemaPost } from '../../core/PetOwner/schema/petowner.interface';
+import { AuthService } from '../../core/auth/services/auth.service';
+import { navigateTo } from '../shared/auth.utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pet-owner-register',
@@ -21,9 +24,12 @@ export class PetOwnerRegisterComponent {
   errorMessage: string = '';
   locationSuggestions: any[] = [];
 
-  petOwnerService = PetOwnerService;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient, 
+    private petOwnerService: PetOwnerService,
+    private authService: AuthService,
+    private router: Router) {}
 
   // Obtener sugerencias de ubicación de OSM usando Nominatim
   getLocationSuggestions(query: string) {
@@ -44,12 +50,26 @@ export class PetOwnerRegisterComponent {
       numberPhone: this.numberPhone,
       location: this.location
     };
-
-
-
-
-    // Aquí enviarías `userData` a tu backend para registrar el nuevo usuario
     console.log('Datos de registro:', userData);
-    // Implementa lógica adicional de registro aquí o llama al servicio de API
+    const user_id =this.authService.decodeToken()?.user_id;
+
+    if (user_id) {
+      this.petOwnerService.createPetOwner(user_id, userData).subscribe(
+        (response) => {
+          console.log('Registro exitoso', response);
+          this.router.navigate(['/pet-owner/home']);
+        },
+        (error) => {
+          console.error('Error en el registro', error);
+          this.errorMessage = 'Error en el registro. Por favor, inténtelo de nuevo.';
+        }
+      )
+    }
+    else {
+      console.error('Error al obtener el ID de usuario');
+      return;
+    }
+
+  
   }
 }

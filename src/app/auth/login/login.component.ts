@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {LoginResponse} from "../../core/shared/login-response.interface";
 
+import { navigateTo } from '../shared/auth.utils';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,7 +25,6 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-
   login() {
     const request: LoginRequest = { email: this.email, password: this.password };
 
@@ -35,9 +36,8 @@ export class LoginComponent {
     ).subscribe((response: LoginResponse | null) => {
       if (response) {
         console.log('Login successful', response);
-        const token = response.access_token;
-        this.authService.storeToken(token);
-        this.router.navigate(['/pet-owner/home']);
+        navigateTo( response.access_token, this.router);
+
       }
     });
   }
