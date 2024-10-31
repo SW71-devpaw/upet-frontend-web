@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="card flex justify-content-center align-items-center mr-4">
-        <p-button label="Book Appointment" class="p-button-raised p-button-rounded btn-book p-0"></p-button>
+        <p-button (click)="openAppointmentDialog()" label="Book Appointment" class="p-button-raised p-button-rounded btn-book p-0"></p-button>
       </div>
     </div>
 
@@ -34,14 +34,17 @@
       <div class="review-header flex flex-row justify-content-between">
         <div class="section-title">Reviews:</div>
         <div class="card flex-column justify-content-center mr-4">
-            <p-button label="+ Add Review"></p-button>
+            <p-button label="+ Add Review" (click)="openReviewDialog()"></p-button>
         </div>
       </div>
       <app-vet-list-review></app-vet-list-review>
     </div>
 </div>
-<p-dialog header="Add reseña" [modal]="true" [(visible)]="formVisible" [style]="{ width: '40rem' }">
-    <form>
 
-    </form>
+<p-dialog header="Add appointment" [modal]="true" [(visible)]="visibleAppointmentDialog" [style]="{ width: '40rem' }">
+    <app-appointment-form-dialog [onClose]="closeAppointmentDialog"></app-appointment-form-dialog>
+</p-dialog>
+
+<p-dialog header="Add review" [modal]="true" [(visible)]="visibleReviewDialog" [style]="{ width: '30rem' }">
+    <app-review-form-dialog [closeDialog]="closeReviewDialog"></app-review-form-dialog>
 </p-dialog>
