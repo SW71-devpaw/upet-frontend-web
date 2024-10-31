@@ -21,7 +21,7 @@ export class PetOwnerRegisterComponent {
   registerForm: FormGroup;
   locationSuggestions: any[] = [];
   submitted = false; // Inicializa la variable
-  location = '';
+
   constructor(
     private http: HttpClient,
     private petOwnerService: PetOwnerService,
@@ -29,7 +29,6 @@ export class PetOwnerRegisterComponent {
     private router: Router,
     private formBuilder: FormBuilder // Usa FormBuilder para crear el formulario
   ) {
-    // Inicializa el FormGroup
     this.registerForm = this.formBuilder.group({
       numberPhone: ['', Validators.required],
       location: ['', Validators.required]
@@ -38,10 +37,20 @@ export class PetOwnerRegisterComponent {
 
   // Obtener sugerencias de ubicación de OSM usando Nominatim
   getLocationSuggestions(query: string) {
-    const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&addressdetails=1&limit=5`;
-    this.http.get(url).subscribe((data: any) => {
-      this.locationSuggestions = data;
-    });
+    if (query) { // Verifica si hay consulta
+      const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&addressdetails=1&limit=5`;
+      this.http.get(url).subscribe(
+        (data: any) => {
+          this.locationSuggestions = data;
+        },
+        (error) => {
+          console.error('Error al obtener sugerencias de ubicación:', error);
+          this.locationSuggestions = []; // Limpiar sugerencias en caso de error
+        }
+      );
+    } else {
+      this.locationSuggestions = []; // Limpiar sugerencias si no hay consulta
+    }
   }
 
   // Seleccionar una ubicación de la lista de sugerencias
@@ -74,11 +83,13 @@ export class PetOwnerRegisterComponent {
         },
         (error) => {
           console.error('Error en el registro', error);
+          // Puedes mostrar un mensaje de error al usuario aquí
           this.registerForm.reset(); // Reinicia el formulario en caso de error
         }
       );
     } else {
       console.error('Error al obtener el ID de usuario');
+      // Puedes mostrar un mensaje de error al usuario aquí
     }
   }
 }

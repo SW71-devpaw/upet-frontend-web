@@ -11,24 +11,18 @@ import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends UpetApiService{
-  static decodeToken(): DecodedToken {
-      throw new Error('Method not implemented.');
-  }
-  static storeToken(token: String) {
-      throw new Error('Method not implemented.');
-  }
+export class AuthService extends UpetApiService {
   private apiUrl: string;
 
   constructor(http: HttpClient) {
     super(http);
-    this.apiUrl = this.buildUrl('auth'); // Usa el método buildUrl() heredado
+    this.apiUrl = this.buildUrl('auth');
   }
   
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/sign-in`, request)
            .pipe(
-              catchError((error) => this.handleError(error)) // Manejo de errores
+              catchError((error) => this.handleError(error))
            );
   }	  
   
@@ -48,20 +42,17 @@ export class AuthService extends UpetApiService{
     localStorage.removeItem('authToken');
   }
 
-
-    // Método para decodificar el token
   decodeToken(): DecodedToken | null {
-      const token = this.getToken();
-      if (!token) {
-        return null; // Retorna null si no hay token
-      }
-      
-      try {
-        return jwtDecode<DecodedToken>(token); // Decodifica el token
-      } catch (error) {
-        console.error('Error al decodificar el token:', error);
-        return null; // Retorna null si hay un error
-      }
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    
+    try {
+      return jwtDecode<DecodedToken>(token);
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
   }
-
 }

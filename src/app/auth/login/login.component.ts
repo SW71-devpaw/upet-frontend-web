@@ -25,7 +25,6 @@ export class LoginComponent {
 
   login() {
     const request: LoginRequest = { email: this.email, password: this.password };
-
     this.authService.login(request).pipe(
       catchError((error) => {
         this.errorMessage = 'Error en el inicio de sesión. Por favor, inténtelo de nuevo.'; // Mensaje de error
@@ -34,7 +33,7 @@ export class LoginComponent {
     ).subscribe((response: LoginResponse | null) => {
       if (response) {
         console.log('Login successful', response);
-        navigateTo(response.access_token, this.router);
+        navigateTo(response.access_token, this.router, this.authService);
       }
     });
   }

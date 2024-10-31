@@ -30,7 +30,7 @@ export class RegisterComponent {
     this.authService.register(this.registerForm.value)
     .subscribe((response) => {
       console.log('Registro exitoso', response);
-      navigateTo(response.access_token, this.router);
+      navigateTo(response.access_token, this.router, this.authService);
     },
     (error) => {  // Manejo de errores
       console.error('Error en el registro', error);
