@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { CarouselModule } from 'primeng/carousel';
-
-import { PasswordModule } from 'primeng/password';
-
-import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
-
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import { PasswordModule } from 'primeng/password';
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-auth-layout',
