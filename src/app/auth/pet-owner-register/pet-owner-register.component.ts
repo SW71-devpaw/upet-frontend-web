@@ -1,35 +1,40 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PetOwnerService } from '../../core/PetOwner/services/pet-owner.service';
 import { PetOwnerSchemaPost } from '../../core/PetOwner/schema/petowner.interface';
 import { AuthService } from '../../core/auth/services/auth.service';
-import { navigateTo } from '../shared/auth.utils';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pet-owner-register',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './pet-owner-register.component.html',
-  styleUrl: './pet-owner-register.component.css'
+  styleUrls: ['./pet-owner-register.component.css']
 })
 export class PetOwnerRegisterComponent {
-  numberPhone: string = '';
-  location: string = '';
-  errorMessage: string = '';
+  registerForm: FormGroup;
   locationSuggestions: any[] = [];
-
-
+  submitted = false; // Inicializa la variable
+  location = '';
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private petOwnerService: PetOwnerService,
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router,
+    private formBuilder: FormBuilder // Usa FormBuilder para crear el formulario
+  ) {
+    // Inicializa el FormGroup
+    this.registerForm = this.formBuilder.group({
+      numberPhone: ['', Validators.required],
+      location: ['', Validators.required]
+    });
+  }
 
   // Obtener sugerencias de ubicación de OSM usando Nominatim
   getLocationSuggestions(query: string) {
@@ -38,20 +43,28 @@ export class PetOwnerRegisterComponent {
       this.locationSuggestions = data;
     });
   }
+
   // Seleccionar una ubicación de la lista de sugerencias
   selectLocation(suggestion: any) {
-    this.location = suggestion.display_name;
+    this.registerForm.patchValue({ location: suggestion.display_name }); // Actualiza el campo de ubicación en el formulario
     this.locationSuggestions = []; // Limpiar sugerencias
   }
 
   // Función de registro
-  register() {
-    let userData: PetOwnerSchemaPost = {
-      numberPhone: this.numberPhone,
-      location: this.location
+  onSubmit() {
+    this.submitted = true; // Cambia el estado a verdadero al intentar enviar el formulario
+
+    // Si el formulario no es válido, simplemente regresamos
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    const userData: PetOwnerSchemaPost = {
+      numberPhone: this.registerForm.value.numberPhone,
+      location: this.registerForm.value.location
     };
     console.log('Datos de registro:', userData);
-    const user_id =this.authService.decodeToken()?.user_id;
+    const user_id = this.authService.decodeToken()?.user_id;
 
     if (user_id) {
       this.petOwnerService.createPetOwner(user_id, userData).subscribe(
@@ -61,15 +74,11 @@ export class PetOwnerRegisterComponent {
         },
         (error) => {
           console.error('Error en el registro', error);
-          this.errorMessage = 'Error en el registro. Por favor, inténtelo de nuevo.';
+          this.registerForm.reset(); // Reinicia el formulario en caso de error
         }
-      )
-    }
-    else {
+      );
+    } else {
       console.error('Error al obtener el ID de usuario');
-      return;
     }
-
-  
   }
 }
