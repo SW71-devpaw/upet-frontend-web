@@ -6,14 +6,15 @@
         class="max-w-full"
         formControlName="date_day"
         [inline]="true"
+        (onSelect)="loadTimesAvailable()"
         [showWeek]="true"/>
     </div>
   </div>
   <div class="card flex flex-column justify-content-center w-full">
     <label>Select time</label>
     <p-dropdown
-      [options]="cities"
-      [(ngModel)]="selectedCity"
+      [options]="availableTimes"
+      formControlName="start_time"
       [checkmark]="true"
       optionLabel="name"
       [showClear]="true"
@@ -22,8 +23,8 @@
   <div class="card flex flex-column justify-content-start">
     <label>Select your pet</label>
     <p-dropdown
-      [options]="cities"
-      [(ngModel)]="selectedCity"
+      [options]="pets"
+      formControlName="pet"
       [checkmark]="true"
       optionLabel="name"
       [showClear]="true"

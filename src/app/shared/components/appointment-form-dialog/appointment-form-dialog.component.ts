@@ -8,6 +8,12 @@ import {ReviewSchemaPost} from "../../../core/review/schema/review.interface";
 import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {VeterinarianService} from "../../../core/Veterinarian/services/veterinarian.service";
+import {formatDateToYYYYMMDD} from "../../helpers/date.formater";
+import {PetService} from "../../../core/Pet/services/pet.service";
+import {PetSchemaResponse} from "../../../core/Pet/schema/pet.interface";
+import {AppointmentSchemaCreate} from "../../../core/Appointment/schema/appointment.interface";
+import {AppointmentService} from "../../../core/Appointment/services/appointment.service";
 
 @Component({
   selector: 'app-appointment-form-dialog',
@@ -29,28 +35,66 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 export class AppointmentFormDialogComponent {
   @Input() visible: boolean = false;
   @Input() onClose!: ()=>void;
+  @Input() vetId!: number;
 
-  cities: {name:string,code:string}[] | undefined;
-  selectedCity: {name:string,code:string} | undefined;
+  availableTimes: {name:string, code:number}[] = [];
+  pets: {name:string, id:number}[] = [];
   myForm:FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+      private fb: FormBuilder,
+      private vetService:VeterinarianService,
+      private petService: PetService,
+      private appointmentService: AppointmentService
+  ) {
     this.myForm = this.fb.group({
       date_day: new FormControl(''),
       description: new FormControl(''),
-      start_time: new FormControl('')
+      start_time: new FormControl(undefined),
+      pet: new FormControl(),
     });
   }
 
-  ngOnInit() {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-    ];
+  ngOnInit(){
+    this.loadPets();
   }
-  submitAppointment(){}
 
+  submitAppointment(){
+    let request:AppointmentSchemaCreate = {
+      date_day: formatDateToYYYYMMDD(this.myForm.value.date_day),
+      description: this.myForm.value.description,
+      start_time: this.myForm.value.start_time.name,
+      pet_id: this.myForm.value.pet.id,
+      veterinarian_id: this.vetId
+    }
+    console.log("Request", request);
+    this.appointmentService.createAppointment(request).subscribe((data:any)=> {
+      console.log("Appointment created", data);
+      alert("Cita creada con éxito");
+      this.onClose();
+    });
+  }
+  loadTimesAvailable(){
+      let request = {
+        date: formatDateToYYYYMMDD(this.myForm.value.date_day),
+      }
+      console.log("Request", request);
+      this.vetService.getAvailableTimes(this.vetId,request).subscribe((data:any)=>{
+        console.log("Available times", data);
+        this.availableTimes = data["available_times"].map((time:string, index:number) => {
+            return {name: time, code: index};
+        });
+      });
+  }
+  loadPets(){
+    //TODO: Implementar servicio para obtener el id del usuario
+      this.petService.getPetsByOwner(1).subscribe((data:PetSchemaResponse[])=>{
+          this.pets = data.map((pet:PetSchemaResponse)=>{
+              return {
+                name: pet.name,
+                id: pet.id
+              }
+          });
+      });
+  }
 }

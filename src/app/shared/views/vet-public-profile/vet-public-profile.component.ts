@@ -66,14 +66,14 @@ export class VetPublicProfileComponent {
     submitReview(){
 
     }
-    closeReviewDialog():void{
+    closeReviewDialog = ()=>{
       this.visibleReviewDialog = false;
     }
     openReviewDialog(){
       this.visibleReviewDialog = true;
     }
 
-    closeAppointmentDialog(){
+    closeAppointmentDialog=()=>{
       this.visibleAppointmentDialog = false;
     }
     openAppointmentDialog(){
