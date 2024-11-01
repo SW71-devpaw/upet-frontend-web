@@ -6,6 +6,8 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {SidebarComponent} from "./shared/components/sidebar/sidebar.component";
 import {NgClass} from "@angular/common";
 import {NavBarComponent} from "./shared/components/nav-bar/nav-bar.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 @Component({
@@ -16,7 +18,7 @@ import {NavBarComponent} from "./shared/components/nav-bar/nav-bar.component";
     AngularFireModule,
     SidebarComponent,
     NgClass,
-    NavBarComponent
+    NavBarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
