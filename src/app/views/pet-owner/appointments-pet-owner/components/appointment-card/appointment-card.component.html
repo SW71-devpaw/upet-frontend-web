@@ -14,7 +14,15 @@
       <small>{{customAppointment.date_day}} | {{customAppointment.start_time}}</small>
     </div>
     <div class="mt-3 mb-3 card flex flex-column justify-content-center align-items-center">
-      <p-button label="View details"></p-button>
+      <p-button (click)="openDetails()" label="View details"></p-button>
     </div>
   </div>
 </div>
+
+<p-dialog header="Appointment details" [modal]="true" [(visible)]="visibleDetails" [style]="{ width: '40rem' }">
+  <app-appointment-details
+    [appointment]="customAppointment"
+    [vet]="vet"
+    [pet]="pet"
+  ></app-appointment-details>
+</p-dialog>
