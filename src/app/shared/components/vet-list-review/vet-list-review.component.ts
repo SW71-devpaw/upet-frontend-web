@@ -23,7 +23,8 @@ export class VetListReviewComponent {
   ngOnInit() {
     //CAMBIAR EL ENDPOINT PARA QUE TRAIGA LAS REVIEWS DE UNA VETERINARIA EN ESPECIFICO
     this.reviewService.getReviews().subscribe((data: ReviewSchemaGet[]) => {
-      this.reviews = data;
+      this.reviews = data.reverse();
+
     });
   }
 }
