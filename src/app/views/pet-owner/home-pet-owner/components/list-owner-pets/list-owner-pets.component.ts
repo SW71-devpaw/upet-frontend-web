@@ -10,6 +10,10 @@ import {PetCardComponent} from "../../../../../shared/components/pet-card/pet-ca
 import {Router} from "@angular/router";
 import { PetSchemaResponse } from '../../../../../core/Pet/schema/pet.interface';
 import { PetService } from '../../../../../core/Pet/services/pet.service';
+import {DecodedToken} from "../../../../../core/auth/schema/decoded-token.interface";
+import {AuthService} from "../../../../../core/auth/services/auth.service";
+import {PetOwnerSchemaGet} from "../../../../../core/PetOwner/schema/petowner.interface";
+import {PetOwnerService} from "../../../../../core/PetOwner/services/pet-owner.service";
 
 @Component({
   selector: 'app-list-owner-pets',
@@ -26,17 +30,21 @@ import { PetService } from '../../../../../core/Pet/services/pet.service';
 export class ListOwnerPetsComponent {
   pets:PetSchemaResponse[] = [];
   visibleAddPet:boolean = false;
+  user:DecodedToken | null;
 
   constructor(
     private petsApiService: PetService,
-    private router: Router
+    private router: Router,
+    private authService:AuthService,
+    private petOwnerService:PetOwnerService
   ) {
+    this.user = authService.decodeToken()!;
   }
 
   ngOnInit() {
-    this.petsApiService.getPetsByOwner(1).subscribe((data) => {
-      this.pets = data;
-    });
+      this.petsApiService.getPetsByOwner(this.user?.user_id!).subscribe((pets) => {
+        this.pets = pets;
+      });
   }
 
   openDialogAddPet() {

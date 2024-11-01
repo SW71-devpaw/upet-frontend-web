@@ -8,6 +8,8 @@ import {SliderModule} from "primeng/slider";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {ReviewService} from "../../../core/review/services/review.service";
 import {ReviewSchemaPost} from "../../../core/review/schema/review.interface";
+import {DecodedToken} from "../../../core/auth/schema/decoded-token.interface";
+import {AuthService} from "../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-review-form-dialog',
@@ -29,16 +31,20 @@ export class ReviewFormDialogComponent {
   @Input() closeDialog!: () => void;
   @Input() vetId!: number;
   myForm:FormGroup = new FormGroup({});
+  user:DecodedToken|null;
 
   constructor(
     private fb:FormBuilder,
-    private reviewService:ReviewService
+    private reviewService:ReviewService,
+    private authService:AuthService
     ) {
 
     this.myForm = this.fb.group({
       stars: new FormControl(0),
       description: new FormControl(''),
     });
+
+    this.user = this.authService.decodeToken();
 
   }
   submitReview(){
@@ -49,8 +55,7 @@ export class ReviewFormDialogComponent {
     }
     console.log("Review", request);
 
-    //TODO: Actualizar el petownerId
-    const petOwnerId = 1;
+    const petOwnerId = this.user?.user_id!;
     this.reviewService.createReview(petOwnerId, request).subscribe(() => {
       alert('Review created');
       this.closeDialog();

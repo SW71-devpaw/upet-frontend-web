@@ -14,6 +14,8 @@ import {PetService} from "../../../core/Pet/services/pet.service";
 import {PetSchemaResponse} from "../../../core/Pet/schema/pet.interface";
 import {AppointmentSchemaCreate} from "../../../core/Appointment/schema/appointment.interface";
 import {AppointmentService} from "../../../core/Appointment/services/appointment.service";
+import {DecodedToken} from "../../../core/auth/schema/decoded-token.interface";
+import {AuthService} from "../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-appointment-form-dialog',
@@ -40,12 +42,14 @@ export class AppointmentFormDialogComponent {
   availableTimes: {name:string, code:number}[] = [];
   pets: {name:string, id:number}[] = [];
   myForm:FormGroup = new FormGroup({});
+  user:DecodedToken|null;
 
   constructor(
       private fb: FormBuilder,
       private vetService:VeterinarianService,
       private petService: PetService,
-      private appointmentService: AppointmentService
+      private appointmentService: AppointmentService,
+      private authService:AuthService
   ) {
     this.myForm = this.fb.group({
       date_day: new FormControl(''),
@@ -53,6 +57,7 @@ export class AppointmentFormDialogComponent {
       start_time: new FormControl(undefined),
       pet: new FormControl(),
     });
+    this.user = authService.decodeToken();
   }
 
   ngOnInit(){
@@ -87,8 +92,7 @@ export class AppointmentFormDialogComponent {
       });
   }
   loadPets(){
-    //TODO: Implementar servicio para obtener el id del usuario
-      this.petService.getPetsByOwner(1).subscribe((data:PetSchemaResponse[])=>{
+      this.petService.getPetsByOwner(this.user?.user_id!).subscribe((data:PetSchemaResponse[])=>{
           this.pets = data.map((pet:PetSchemaResponse)=>{
               return {
                 name: pet.name,
