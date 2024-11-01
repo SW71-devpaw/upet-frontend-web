@@ -7,6 +7,8 @@ import {DialogModule} from "primeng/dialog";
 import { ListOwnerPetsComponent } from '../home-pet-owner/components/list-owner-pets/list-owner-pets.component';
 import { FormAddPetComponent } from '../home-pet-owner/components/form-add-pet/form-add-pet.component';
 import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
+import {DecodedToken} from "../../../core/auth/schema/decoded-token.interface";
+import {AuthService} from "../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-pets-pet-owner',
@@ -24,14 +26,17 @@ import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
 export class PetsPetOwnerComponent {
   pets:PetSchemaResponse[] = [];
   visibleAddPet:boolean = false;
+  user:DecodedToken|null;
 
   constructor(
     private homePetOwnerService: HomePetOwnerService,
+    private authService:AuthService
   ) {
+    this.user = authService.decodeToken();
   }
 
   ngOnInit() {
-    this.homePetOwnerService.getMyPets(1).subscribe((data) => {
+    this.homePetOwnerService.getMyPets(this.user?.user_id!).subscribe((data) => {
       this.pets = data;
     });
   }

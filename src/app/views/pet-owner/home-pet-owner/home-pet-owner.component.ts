@@ -4,6 +4,8 @@ import { PetCardComponent } from "../../../shared/components/pet-card/pet-card.c
 import { BannerOwnerComponent } from "./components/banner-owner/banner-owner.component";
 import { ListOwnerPetsComponent } from "./components/list-owner-pets/list-owner-pets.component";
 import { ListScpecialistsNearbyComponent } from "./components/list-scpecialists-nearby/list-scpecialists-nearby.component";
+import {DecodedToken} from "../../../core/auth/schema/decoded-token.interface";
+import {AuthService} from "../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-home-pet-owner',
@@ -19,5 +21,6 @@ import { ListScpecialistsNearbyComponent } from "./components/list-scpecialists-
   styleUrls: ['./home-pet-owner.component.css'] // Cambiado de 'styleUrl' a 'styleUrls'
 })
 export class HomePetOwnerComponent {
+
 
 }
