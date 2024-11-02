@@ -1,6 +1,7 @@
 {
   "hosting": {
-    "public": "y",
+    "site": "devpaw-upet",
+    "public": "dist/upet-frontend-web/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
