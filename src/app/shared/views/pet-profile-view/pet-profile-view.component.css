@@ -1,0 +1,56 @@
+.header-profile{
+  background-color: var(--color-primary);
+}
+.header-profile-text{
+  color: var(--color-white);
+}
+.badges-container{
+  width:90%;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
+
+}
+.badge{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 150px;
+}
+.container-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.header-profile-button{
+  color: var(--color-white);
+}
+.header-profile-button button{
+  background-color: var(--color-button-secondary);
+  color: var(--color-white);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+.male{
+  color: pink;
+}
+.female{
+  color:deepskyblue;
+}
+.my-accordion{
+  width: 90%;
+  margin: 0 auto;
+}

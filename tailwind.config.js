@@ -4,6 +4,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        customSidebar: '#F0F6FF',
+        customBlue: '#0A1B3E'
+      },
+      
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
@@ -11,3 +16,4 @@ module.exports = {
   },
   plugins: [],
 }
+

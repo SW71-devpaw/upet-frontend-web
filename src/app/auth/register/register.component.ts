@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../core/auth/services/auth.service';
+import { navigateTo } from '../shared/auth.utils';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +16,7 @@ export class RegisterComponent {
   roles = ['Veterinarian', 'Pet Owner'];
   submitted = false;  // Para controlar el estado de envío del formulario
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -24,12 +26,23 @@ export class RegisterComponent {
     });
   }
 
+  register(){
+    this.authService.register(this.registerForm.value)
+    .subscribe((response) => {
+      console.log('Registro exitoso', response);
+      navigateTo(response.access_token, this.router, this.authService);
+    },
+    (error) => {  // Manejo de errores
+      console.error('Error en el registro', error);
+    }
+  );
+  }
+
   onSubmit() {
     this.submitted = true;  // Cambia el estado de envío a verdadero
-
     if (this.registerForm.valid) {
       console.log('Form Submitted', this.registerForm.value);
-      // Aquí puedes añadir la lógica para enviar el formulario a tu backend
+      this.register();
     } else {
       console.log('Form is invalid');
     }

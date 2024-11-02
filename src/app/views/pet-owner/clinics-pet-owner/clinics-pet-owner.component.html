@@ -1,0 +1,16 @@
+<div class="w-full flex flex-column align-items-center justify-content-center pl-3">
+  <div class="flex w-full flex-column justify-content-evenly mt-5">
+    <div class="flex flex-column align-items-center justify-content-center">
+      All Clinics
+    </div>
+    <div class="card w-full flex justify-content-end">
+      <p-button (click)="openMapDialog()" class="map-btn mr-4" label="See map" icon="pi pi-map" iconPos="right" />
+    </div>
+  </div>
+  <div class="container-clinics mt-3">
+    <app-clinic-card *ngFor="let clinic of clinics" [clinic]="clinic" ></app-clinic-card>
+  </div>
+</div>
+<p-dialog header="Map" [modal]="true" [(visible)]="visibleMapDialog" [style]="{ width: '40rem' }">
+  <app-custom-map [closeDialog]="closeMapDialog" [markers]="markers"></app-custom-map>
+</p-dialog>
