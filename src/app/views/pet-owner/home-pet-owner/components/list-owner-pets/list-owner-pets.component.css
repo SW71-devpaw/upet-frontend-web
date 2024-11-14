@@ -16,7 +16,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 90%; /* Ajusta el ancho máximo según sea necesario */
+  width: 95%; /* Ajusta el ancho máximo según sea necesario */
   overflow-x: auto;
   margin: 0 auto; /* Centra el contenedor */
   background: #fff; /* Fondo blanco para la cinta */
@@ -31,10 +31,12 @@
 }
 
 .pets-wrapper {
-  display: flex;
-  max-width: 90%;
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias líneas */
-  gap: 15px; /* Espacio entre las tarjetas */
+  width: 100%;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items:center;
+  justify-items:center;
+
 }
 .btn-primary{
   border: none;
