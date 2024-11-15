@@ -9,6 +9,7 @@ import { FormAddPetComponent } from '../home-pet-owner/components/form-add-pet/f
 import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
 import {DecodedToken} from "../../../core/auth/schema/decoded-token.interface";
 import {AuthService} from "../../../core/auth/services/auth.service";
+import {SearchBarComponent} from "../../../shared/components/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-pets-pet-owner',
@@ -18,13 +19,15 @@ import {AuthService} from "../../../core/auth/services/auth.service";
     NgForOf,
     PetCardComponent,
     DialogModule,
-    FormAddPetComponent
+    FormAddPetComponent,
+    SearchBarComponent
   ],
   templateUrl: './pets-pet-owner.component.html',
   styleUrl: './pets-pet-owner.component.css'
 })
 export class PetsPetOwnerComponent {
   pets:PetSchemaResponse[] = [];
+  petsAux:PetSchemaResponse[] = [];
   visibleAddPet:boolean = false;
   user:DecodedToken|null;
 
@@ -38,6 +41,7 @@ export class PetsPetOwnerComponent {
   ngOnInit() {
     this.homePetOwnerService.getMyPets(this.user?.user_id!).subscribe((data) => {
       this.pets = data;
+      this.petsAux = data;
     });
   }
 
@@ -47,6 +51,15 @@ export class PetsPetOwnerComponent {
 
   closeDialogAddPet = () =>{
     this.visibleAddPet = false;
+  }
+
+  filterPets = (key:string) => {
+    if(key === '') {
+      this.pets = [...this.petsAux];
+    }
+    this.pets =  this.petsAux.filter((pet) => {
+      return pet.name.includes(key);
+    });
   }
 
   protected readonly TypeForm = TypeForm;

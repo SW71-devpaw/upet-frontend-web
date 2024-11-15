@@ -24,8 +24,9 @@
   color: #333;
 }
 .upcoming{
-  color: gold;
-  background-color: #f0f0f0;
+  color: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  background-color: gold;
 }
 .past{
   color: #333;
