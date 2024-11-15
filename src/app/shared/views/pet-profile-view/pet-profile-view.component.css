@@ -27,6 +27,7 @@
   align-items: center;
   width: 200px;
   height: 150px;
+  background-color:var(--color-primary);
 }
 .container-image img{
   width: 100%;

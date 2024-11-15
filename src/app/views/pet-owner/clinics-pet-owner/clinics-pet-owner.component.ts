@@ -8,6 +8,7 @@ import {CustomMapComponent} from "../../../shared/components/custom-map/custom-m
 import {NgForOf} from "@angular/common";
 import {VeterinaryClinicService} from "../../../core/VeterinaryClinic/services/veterinary-clinic.service";
 import {VeterinaryClinicSchemaGet} from "../../../core/VeterinaryClinic/schema/veterinary-clinic.interface";
+import {SearchBarComponent} from "../../../shared/components/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-clinics-pet-owner',
@@ -17,13 +18,15 @@ import {VeterinaryClinicSchemaGet} from "../../../core/VeterinaryClinic/schema/v
     Button,
     DialogModule,
     CustomMapComponent,
-    NgForOf
+    NgForOf,
+    SearchBarComponent
   ],
   templateUrl: './clinics-pet-owner.component.html',
   styleUrl: './clinics-pet-owner.component.css'
 })
 export class ClinicsPetOwnerComponent {
   clinics: VeterinaryClinicSchemaGet[] = [];
+  clinicsAux: VeterinaryClinicSchemaGet[] = [];
   visibleMapDialog = false;
   markers: MapMarkerCustom[] = [];
 
@@ -33,6 +36,7 @@ export class ClinicsPetOwnerComponent {
   ngOnInit() {
     this.clinicsApiService.getVeterinaryClinics().subscribe((clinics: VeterinaryClinicSchemaGet[]) => {
       this.clinics = clinics;
+      this.clinicsAux = clinics;
       this.markers = clinics.map((clinic: VeterinaryClinicSchemaGet): MapMarkerCustom =>
           this.parseClinicToMarker(clinic));
       console.log("markers", this.markers);
@@ -57,5 +61,14 @@ export class ClinicsPetOwnerComponent {
 
   openMapDialog() {
     this.visibleMapDialog = true;
+  }
+
+  filterClinics = (keY: string) => {
+    if (keY === '') {
+      this.clinics = [...this.clinicsAux];
+    }
+    this.clinics = this.clinicsAux.filter((clinic) => {
+      return clinic.name.includes(keY);
+    });
   }
 }

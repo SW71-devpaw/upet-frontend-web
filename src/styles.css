@@ -25,3 +25,9 @@ html, body { margin: 0;
   --color-terciary: #307176;
   --color-button-secondary-hover: #E36275FF;
 }
+.title-section{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+}
