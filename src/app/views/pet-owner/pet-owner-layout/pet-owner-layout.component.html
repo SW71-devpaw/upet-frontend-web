@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="flex mt-16">
   <app-sidebar (sidebarToggle)="onSidebarToggle($event)" ></app-sidebar>
-  <div [ngClass]="{'pet-layout-full-screen': isSidebarCollapsed, 'w-4/5': !isSidebarCollapsed}" class="transition-width duration-300">
+  <div [ngClass]="{'pet-layout-full-screen': true}" class="">
     <router-outlet class="view h-full"></router-outlet>
   </div>
 </div>

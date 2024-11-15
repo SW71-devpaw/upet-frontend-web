@@ -9,7 +9,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 90%; /* Ajusta el ancho máximo según sea necesario */
+  width: 95%; /* Ajusta el ancho máximo según sea necesario */
   overflow-x: auto;
   margin: 0 auto; /* Centra el contenedor */
   background: #fff; /* Fondo blanco para la cinta */
@@ -26,9 +26,16 @@
 .vets-wrapper {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 20px; /* Espacio entre las tarjetas */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  align-items:center;
+  justify-items: center;
 }
+@media (max-width: 500px) {
+  .vets-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
 .btn-primary{
   border: none;
   padding: 10px 20px;

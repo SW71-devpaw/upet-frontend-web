@@ -6,7 +6,8 @@
   padding: 20px; /* Espaciado interno */
   margin: 0px auto; /* Aumentar margen en los lados */
   color:white;
-  background-color: #0A1B3E
+  background-color: #0A1B3E;
+  width:95%;
 }
 .title{
   font-size: 30px; /* Tamaño de fuente */
