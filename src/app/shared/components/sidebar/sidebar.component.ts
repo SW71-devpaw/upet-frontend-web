@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 
@@ -17,17 +17,8 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 })
 export class SidebarComponent {
   @Output() sidebarToggle = new EventEmitter<boolean>();
+  @Input() options: any[] = [];
   isCollapsed = false;
-
-  options = [
-    { label: 'Home', icon: 'pi pi-home', link: '/pet-owner/home' },
-    { label: 'Pets', icon: 'pi pi-wifi', link: '/pet-owner/pets' },
-    {label: 'Clinics', icon:'pi pi-building', link: '/pet-owner/clinics'},
-    { label: 'Appointments', icon: 'pi pi-book', link: '/pet-owner/appointments' },
-    { label: 'Notifications', icon: 'pi pi-bell', link: '/pet-owner/home' },
-    { label: 'Perfil', icon: 'pi pi-user', link: '/pet-owner/profile' },
-    { label: 'Cerrar sesión', icon: 'pi pi-sign-out', link: '#', action: 'logout' }
-  ];
 
   constructor(private router: Router) {
   }

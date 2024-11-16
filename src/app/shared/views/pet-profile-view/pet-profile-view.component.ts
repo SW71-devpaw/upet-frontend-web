@@ -16,6 +16,7 @@ import { MedicalHistoryBaseService } from '../../../core/MedicalHistory/services
 import { PetService } from '../../../core/Pet/services/pet.service';
 import { PetResponse } from '../../../views/pet-owner/home-pet-owner/interfaces/PetResponse';
 import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
+import {AuthService} from "../../../core/auth/services/auth.service";
 import {InputTextModule} from "primeng/inputtext";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {PaginatorModule} from "primeng/paginator";
@@ -66,7 +67,8 @@ export class PetProfileViewComponent {
   constructor(
     private router: ActivatedRoute,
     private petsApiService: PetService,
-    private historyApiService: MedicalHistoryBaseService
+    private historyApiService: MedicalHistoryBaseService,
+    private authService: AuthService
   ) {
     this.router.params.subscribe(params => {
       this.petId = params['id'];
