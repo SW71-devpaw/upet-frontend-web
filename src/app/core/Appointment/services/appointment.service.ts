@@ -77,7 +77,11 @@ export class AppointmentService extends UpetApiService {
       catchError(this.handleError)
     );
   }
-
+  getPastAppointmentsByVeterinarianId(veterinarianId: number): Observable<AppointmentSchemaGet[]> {
+    return this.http.get<AppointmentSchemaGet[]>(`${this.apiUrl}/veterinarian/${veterinarianId}/past`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 }
 

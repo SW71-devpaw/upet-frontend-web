@@ -20,7 +20,7 @@ export class VetLayoutComponent {
   isSidebarCollapsed=false;
   options = [
     { label: 'Home', icon: 'pi pi-home', link: '/vets/home' },
-    { label: 'Booking', icon: 'pi pi-wifi', link: '/vets/pets' },
+    { label: 'Booking', icon: 'pi pi-wifi', link: '/vets/booking' },
     {label: 'Reviews', icon:'pi pi-building', link: '/vets/reviews'},
     { label: 'Notifications', icon: 'pi pi-book', link: '/vets/notifications' },
     { label: 'Profile', icon: 'pi pi-user', link: '/vets/profile' },
