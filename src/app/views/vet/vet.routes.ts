@@ -3,6 +3,7 @@ import {PetProfileViewComponent} from "../../shared/views/pet-profile-view/pet-p
 import {VetLayoutComponent} from "./vet-layout/vet-layout.component";
 import {HomeVetComponent} from "./home-vet/home-vet.component";
 import {AppointmentsViewComponent} from "../../shared/views/appointments-view/appointments-view.component";
+import {ReviewsVetComponent} from "./reviews-vet/reviews-vet.component";
 
 export const VET_ROUTES: Route[] = [
   {
@@ -15,6 +16,9 @@ export const VET_ROUTES: Route[] = [
       },
       {
         path:'booking', component:AppointmentsViewComponent
+      },
+      {
+        path:'reviews', component:ReviewsVetComponent
       }
     ]
   },
