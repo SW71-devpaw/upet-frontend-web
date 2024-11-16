@@ -4,6 +4,7 @@ import {VetLayoutComponent} from "./vet-layout/vet-layout.component";
 import {HomeVetComponent} from "./home-vet/home-vet.component";
 import {AppointmentsViewComponent} from "../../shared/views/appointments-view/appointments-view.component";
 import {ReviewsVetComponent} from "./reviews-vet/reviews-vet.component";
+import {ProfileVetComponent} from "./profile-vet/profile-vet.component";
 
 export const VET_ROUTES: Route[] = [
   {
@@ -19,6 +20,9 @@ export const VET_ROUTES: Route[] = [
       },
       {
         path:'reviews', component:ReviewsVetComponent
+      },
+      {
+        path:'profile', component:ProfileVetComponent
       }
     ]
   },
