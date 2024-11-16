@@ -34,6 +34,9 @@
     </form>
     <p-divider layout="vertical"/>
     <div class="w-full flex-column results-container" >
+      <p *ngIf="diseases.length==0">
+        No diseases found
+      </p>
       <div *ngFor="let result of diseases" class="medical-result mb-4">
         <div>Name: {{ result.name }}</div>
         <div>Severity: {{ result.severity }}</div>

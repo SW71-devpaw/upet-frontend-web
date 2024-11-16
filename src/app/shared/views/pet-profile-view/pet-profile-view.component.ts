@@ -5,7 +5,7 @@ import {
   FormAddPetComponent
 } from "../../../views/pet-owner/home-pet-owner/components/form-add-pet/form-add-pet.component";
 import {TypeForm} from "../../../views/pet-owner/home-pet-owner/interfaces/type-form.enum";
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {Button} from "primeng/button";
 import {AccordionModule} from "primeng/accordion";
 import {MedicalResultsComponent} from "./components/medical-results/medical-results.component";
@@ -16,6 +16,10 @@ import { MedicalHistoryBaseService } from '../../../core/MedicalHistory/services
 import { PetService } from '../../../core/Pet/services/pet.service';
 import { PetResponse } from '../../../views/pet-owner/home-pet-owner/interfaces/PetResponse';
 import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
+import {InputTextModule} from "primeng/inputtext";
+import {FloatLabelModule} from "primeng/floatlabel";
+import {PaginatorModule} from "primeng/paginator";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-pet-profile-view',
@@ -29,7 +33,12 @@ import { PetSchemaResponse } from '../../../core/Pet/schema/pet.interface';
     MedicalResultsComponent,
     DiseasesComponent,
     SurgeriesComponent,
-    VaccinesComponent
+    VaccinesComponent,
+    NgClass,
+    InputTextModule,
+    FloatLabelModule,
+    PaginatorModule,
+    ReactiveFormsModule
   ],
   templateUrl: './pet-profile-view.component.html',
   styleUrl: './pet-profile-view.component.css'
@@ -41,6 +50,18 @@ export class PetProfileViewComponent {
   historyId: number | undefined;
   visible = false;
   activeIndex: number | undefined = 0;
+  isTracked= false;
+  petCollarData = {
+    id: 1,
+    temperature: 37.5,
+    lpm: 80,
+    bpm: 80,
+    location:{ lat: 125, lng: 125},
+    battery: 100,
+  }
+
+  dialogStartTrackVisible = false;
+  dialogStopTrackVisible = false;
 
   constructor(
     private router: ActivatedRoute,
@@ -83,6 +104,26 @@ export class PetProfileViewComponent {
   }
   getHistoryMedic(){
 
+  }
+  startTrack(){
+    this.isTracked = true;
+    this.closeDialogTracking();
+  }
+  stopTrack(){
+    this.isTracked = false;
+    this.closeDialogStopTracking();
+  }
+  openDialogTracking(){
+    this.dialogStartTrackVisible = true;
+  }
+  closeDialogTracking(){
+    this.dialogStartTrackVisible = false;
+  }
+  openDialogStopTracking(){
+    this.dialogStopTrackVisible = true;
+  }
+  closeDialogStopTracking(){
+    this.dialogStopTrackVisible = false;
   }
   protected readonly TypeForm = TypeForm;
 }

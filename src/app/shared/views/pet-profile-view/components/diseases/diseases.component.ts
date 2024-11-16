@@ -5,7 +5,7 @@ import { DividerModule } from 'primeng/divider';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import { PaginatorModule } from 'primeng/paginator';
 
 import { formatDateToYYYYMMDD } from '../../../../helpers/date.formater';
@@ -24,7 +24,8 @@ import { DiseasesService } from '../../../../../core/MedicalHistory/services/Dis
     InputTextModule,
     InputTextareaModule,
     NgForOf,
-    PaginatorModule
+    PaginatorModule,
+    NgIf
   ],
   templateUrl: './diseases.component.html',
   styleUrls: ['./diseases.component.css']

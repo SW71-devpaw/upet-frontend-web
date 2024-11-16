@@ -3,7 +3,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {DividerModule} from "primeng/divider";
 import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
 import { MedicalHistoryBaseService } from '../../../../../core/MedicalHistory/services/shared/medical-history-base.service';
@@ -20,7 +20,8 @@ import { MedicResultService } from '../../../../../core/MedicalHistory/services/
     CalendarModule,
     NgForOf,
     DividerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './medical-results.component.html',
   styleUrl: './medical-results.component.css'
