@@ -18,6 +18,9 @@ export const VET_ROUTES: Route[] = [
       {
         path: 'home', component: HomeVetComponent
       },
+      {
+        path: 'pets/:id', component: PetProfileViewComponent
+      },
     ]
   },
 ]

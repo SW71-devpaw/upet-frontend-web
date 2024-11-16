@@ -19,11 +19,11 @@ import {NgClass} from "@angular/common";
 export class VetLayoutComponent {
   isSidebarCollapsed=false;
   options = [
-    { label: 'Home', icon: 'pi pi-home', link: '/pet-owner/home' },
-    { label: 'Booking', icon: 'pi pi-wifi', link: '/pet-owner/pets' },
-    {label: 'Reviews', icon:'pi pi-building', link: '/pet-owner/clinics'},
-    { label: 'Notifications', icon: 'pi pi-book', link: '/pet-owner/appointments' },
-    { label: 'Profile', icon: 'pi pi-user', link: '/pet-owner/profile' },
+    { label: 'Home', icon: 'pi pi-home', link: '/vets/home' },
+    { label: 'Booking', icon: 'pi pi-wifi', link: '/vets/pets' },
+    {label: 'Reviews', icon:'pi pi-building', link: '/vets/reviews'},
+    { label: 'Notifications', icon: 'pi pi-book', link: '/vets/notifications' },
+    { label: 'Profile', icon: 'pi pi-user', link: '/vets/profile' },
     { label: 'Logout', icon: 'pi pi-sign-out', link: '#', action: 'logout' }
   ];
   onSidebarToggle(isCollapsed:boolean){
