@@ -5,7 +5,7 @@ import {DividerModule} from "primeng/divider";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {PaginatorModule} from "primeng/paginator";
 import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
 import { SurgerySchemaRequest, SurgerySchemaResponse } from '../../../../../core/MedicalHistory/schema/surgery.interface';
@@ -24,7 +24,8 @@ import { SurgerieService } from '../../../../../core/MedicalHistory/services/Sur
     InputTextareaModule,
     NgForOf,
     PaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './surgeries.component.html',
   styleUrl: './surgeries.component.css'

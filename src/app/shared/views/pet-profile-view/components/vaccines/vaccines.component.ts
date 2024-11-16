@@ -5,7 +5,7 @@ import {DividerModule} from "primeng/divider";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {PaginatorModule} from "primeng/paginator";
 import {formatDateToYYYYMMDD} from "../../../../helpers/date.formater";
 import { VaccineSchemaRequest, VaccineSchemaResponse } from '../../../../../core/MedicalHistory/schema/vaccine.interface';
@@ -24,7 +24,8 @@ import { VaccineService } from '../../../../../core/MedicalHistory/services/Vacc
     InputTextareaModule,
     NgForOf,
     PaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './vaccines.component.html',
   styleUrl: './vaccines.component.css'

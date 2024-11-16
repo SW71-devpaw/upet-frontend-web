@@ -5,15 +5,18 @@
   color: var(--color-white);
 }
 .badges-container{
-  width:90%;
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  justify-content: center;
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 
 }
 .badge{
   margin: 10px;
   padding: 10px;
+  width: 250px;
+  height: 70px;
   border-radius: 10px;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -23,7 +26,7 @@
 }
 .container-image{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 200px;
   height: 150px;
@@ -54,4 +57,34 @@
 .my-accordion{
   width: 90%;
   margin: 0 auto;
+}
+.isTracked button{
+  background-color: green;
+  color: var(--color-white);
+}
+
+.noTracked button{
+  background-color: red;
+  color: white;
+}
+.iot-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 250px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: var(--color-terciary);
+  color: var(--color-white);
+  margin: 10px;
+}
+.iot-item:hover{
+  background-color: green;
+  cursor:pointer;
+}
+
+.value{
+  font-size: 1.5rem;
 }

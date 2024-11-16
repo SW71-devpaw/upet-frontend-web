@@ -52,6 +52,9 @@
   </form>
   <p-divider layout="vertical" />
   <div class="w-full flex-column results-container">
+    <p *ngIf="vaccines.length==0">
+      No vaccines registered
+    </p>
     <div *ngFor="let result of vaccines" class="medical-result mb-4">
       <div>Name: {{result.name}}</div>
       <div>Type: {{result.vaccineType}}</div>
