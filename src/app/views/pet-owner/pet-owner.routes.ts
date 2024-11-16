@@ -7,7 +7,6 @@ import {PetProfileViewComponent} from "../../shared/views/pet-profile-view/pet-p
 import {ClinicsPetOwnerComponent} from "./clinics-pet-owner/clinics-pet-owner.component";
 import {ClinicProfileComponent} from "../../shared/views/clinic-profile/clinic-profile.component";
 import {VetPublicProfileComponent} from "../../shared/views/vet-public-profile/vet-public-profile.component";
-import {AppointmentsPetOwnerComponent} from "./appointments-pet-owner/appointments-pet-owner.component";
 import {ProfilePetOwnerComponent} from "./profile-pet-owner/profile-pet-owner.component";
 import {AppointmentsViewComponent} from "../../shared/views/appointments-view/appointments-view.component";
 

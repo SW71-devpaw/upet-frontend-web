@@ -5,12 +5,12 @@ import {AuthService} from "../../../core/auth/services/auth.service";
 import {PetOwnerService} from "../../../core/PetOwner/services/pet-owner.service";
 import {VeterinarianSchemaResponse} from "../../../core/Veterinarian/schema/veterinarian.interface";
 import {VeterinarianService} from "../../../core/Veterinarian/services/veterinarian.service";
-import {
-  AppointmentCardComponent
-} from "../../pet-owner/appointments-pet-owner/components/appointment-card/appointment-card.component";
 import {AppointmentSchemaGet} from "../../../core/Appointment/schema/appointment.interface";
 import {AppointmentService} from "../../../core/Appointment/services/appointment.service";
 import {NgForOf} from "@angular/common";
+import {
+  AppointmentCardComponent
+} from "../../../shared/views/appointments-view/components/appointment-card/appointment-card.component";
 
 @Component({
   selector: 'app-home-vet',

@@ -6,9 +6,7 @@ import {UserType} from "../../../core/auth/enum/UserType.enum";
 import {TabMenuModule} from "primeng/tabmenu";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {
-  AppointmentCardComponent
-} from "../../../views/pet-owner/appointments-pet-owner/components/appointment-card/appointment-card.component";
+import {AppointmentCardComponent} from "./components/appointment-card/appointment-card.component";
 
 @Component({
   selector: 'app-appointments-view',
