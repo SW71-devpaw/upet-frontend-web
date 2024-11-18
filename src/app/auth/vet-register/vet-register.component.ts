@@ -48,7 +48,7 @@ registerVet(clinicName : string = this.clinicName, otp_password : string = this.
 
   const vetData: VeterinarianSchemaRequest = {
     clinicName: clinicName,
-    otp_password: otp_password, 
+    otp_password: otp_password,
   };
   // Aquí puedes hacer la llamada a tu servicio para registrar al veterinario
   console.log('Register Vet:', vetData);
@@ -77,14 +77,12 @@ registerClinic() {
     office_hours_end: this.office_hours_end,
   };
 
-  
-
   // Aquí puedes hacer la llamada a tu servicio para registrar la clínica
   console.log('Register Clinic:', clinicData);
   this.clinicService.createVeterinaryClinic(clinicData).subscribe(
     (response: VeterinaryClinicSchemaGet) => {
-      console.log('Clinic registered', response);
-      
+      alert('Clinic registered');
+
       this.clinicService.generateUniquePassword(response.id).subscribe(
         (password: string) => {
           this.otp_password = password;
@@ -96,18 +94,16 @@ registerClinic() {
           this.registerVet(vetData.clinicName, vetData.otp_password);
         },
         (error) => {
-          console.error('Error generating unique password', error);
+          alert('Error generating unique password');
         }
       );
 
 
     } , (error) => {
-      console.error('Error registering clinic', error);
+      alert('Error registering clinic');
     });
 
 }
-
-
 
 registerVeterinarian() {
   console.log('Registering veterinarian...');

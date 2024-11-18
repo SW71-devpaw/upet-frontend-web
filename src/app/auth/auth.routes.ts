@@ -6,13 +6,12 @@ import { PetOwnerRegisterComponent } from "./pet-owner-register/pet-owner-regist
 import { VetRegisterComponent } from "./vet-register/vet-register.component";
 
 export const AUTH_ROUTES: Routes =[
-{   
+{
     path: 'auth', component: AuthLayoutComponent, children: [
         {path: 'login', component: LoginComponent },
         {path: 'register', component: RegisterComponent},
         {path: 'pet-owner', component: PetOwnerRegisterComponent},
         {path: 'vet', component: VetRegisterComponent}
-
-    ] 
+    ]
 },
 ]
