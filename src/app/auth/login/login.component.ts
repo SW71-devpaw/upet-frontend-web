@@ -28,11 +28,12 @@ export class LoginComponent {
     this.authService.login(request).pipe(
       catchError((error) => {
         this.errorMessage = 'Error en el inicio de sesión. Por favor, inténtelo de nuevo.'; // Mensaje de error
+        alert('Error en el inicio de sesión: ' + JSON.stringify(error));
         return of(null); // Puedes manejar el error de manera más sofisticada si lo deseas
       })
     ).subscribe((response: LoginResponse | null) => {
       if (response) {
-        console.log('Login successful', response);
+        alert('Login successful');
         navigateTo(response.access_token, this.router, this.authService);
       }
     });
