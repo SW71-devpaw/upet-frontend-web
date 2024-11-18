@@ -31,7 +31,13 @@ export class NotificationService extends UpetApiService {
 
   // Obtener notificaciones por ID de propietario de mascota
   getNotificationsByPetOwnerId(petOwnerId: number): Observable<NotificationSchemaGet[]> {
-    return this.http.get<NotificationSchemaGet[]>(`${this.apiUrl}/petowner/${petOwnerId}`).pipe(
+    return this.http.get<NotificationSchemaGet[]>(`${this.apiUrl}/pet-owner/${petOwnerId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getNotificationsByVeterinaryId(veterinaryId: number): Observable<NotificationSchemaGet[]> {
+    return this.http.get<NotificationSchemaGet[]>(`${this.apiUrl}/veterinarian/${veterinaryId}`).pipe(
       catchError(this.handleError)
     );
   }

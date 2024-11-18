@@ -23,9 +23,9 @@ export class PetOwnerLayoutComponent {
     { label: 'Pets', icon: 'pi pi-wifi', link: '/pet-owner/pets' },
     {label: 'Clinics', icon:'pi pi-building', link: '/pet-owner/clinics'},
     { label: 'Appointments', icon: 'pi pi-book', link: '/pet-owner/appointments' },
-    { label: 'Notifications', icon: 'pi pi-bell', link: '/pet-owner/home' },
-    { label: 'Perfil', icon: 'pi pi-user', link: '/pet-owner/profile' },
-    { label: 'Cerrar sesión', icon: 'pi pi-sign-out', link: '#', action: 'logout' }
+    { label: 'Notifications', icon: 'pi pi-bell', link: '/pet-owner/notifications' },
+    { label: 'Profile', icon: 'pi pi-user', link: '/pet-owner/profile' },
+    { label: 'Log out', icon: 'pi pi-sign-out', link: '#', action: 'logout' }
   ];
 
   onSidebarToggle(isCollapsed:boolean){
