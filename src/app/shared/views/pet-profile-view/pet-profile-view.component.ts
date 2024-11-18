@@ -20,7 +20,11 @@ import {AuthService} from "../../../core/auth/services/auth.service";
 import {InputTextModule} from "primeng/inputtext";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {PaginatorModule} from "primeng/paginator";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {SmartCollarService} from "../../../core/SmartCollar/services/smart-collar.service";
+import {SmartCollarSchemaGet} from "../../../core/SmartCollar/schema/smart-collar.interface";
+import {firstValueFrom} from "rxjs";
+import {UserType} from "../../../core/auth/enum/UserType.enum";
 
 @Component({
   selector: 'app-pet-profile-view',
@@ -39,7 +43,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     InputTextModule,
     FloatLabelModule,
     PaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './pet-profile-view.component.html',
   styleUrl: './pet-profile-view.component.css'
@@ -52,27 +57,31 @@ export class PetProfileViewComponent {
   visible = false;
   activeIndex: number | undefined = 0;
   isTracked= false;
-  petCollarData = {
-    id: 1,
-    temperature: 37.5,
-    lpm: 80,
-    bpm: 80,
-    location:{ lat: 125, lng: 125},
-    battery: 100,
-  }
+
+  productCodeForm:FormGroup = new FormGroup({});
+
+  petCollarData:SmartCollarSchemaGet = {} as SmartCollarSchemaGet;
 
   dialogStartTrackVisible = false;
   dialogStopTrackVisible = false;
+  userRole:UserType;
+  intervalIdRequestCollar: any;
 
   constructor(
     private router: ActivatedRoute,
     private petsApiService: PetService,
     private historyApiService: MedicalHistoryBaseService,
-    private authService: AuthService
+    private authService: AuthService,
+    private smartCollarService:SmartCollarService
   ) {
     this.router.params.subscribe(params => {
       this.petId = params['id'];
     });
+    this.userRole = this.authService.getRole();
+    this.productCodeForm = new FormGroup({
+      productCode: new FormControl('', Validators.required)
+    });
+
   }
 
   ngOnInit() {
@@ -89,7 +98,27 @@ export class PetProfileViewComponent {
         console.log({location: 'PetProfileViewComponent', history});
       });
     }
+
+    this.smartCollarService.getSmartCollarByPetId(this.petId!).subscribe(data => {
+      if (data.length > 0) {
+        this.isTracked = true;
+        this.petCollarData = data[0];
+        this.intervalIdRequestCollar = setInterval(()=>{
+          console.log('Requesting collar data');
+          this.smartCollarService.getSmartCollarByPetId(this.petId!).subscribe(data => {
+            if(data.length>0){
+              this.petCollarData = data[0];
+            }
+          });
+        },100);
+      }
+    });
   }
+
+  ngOnDestroy(){
+    clearInterval(this.intervalIdRequestCollar);
+  }
+
   closeDialogEdit = () =>{
     this.visible = false;
   }
@@ -107,11 +136,31 @@ export class PetProfileViewComponent {
   getHistoryMedic(){
 
   }
-  startTrack(){
-    this.isTracked = true;
-    this.closeDialogTracking();
+  async startTrack(){
+    let collars:SmartCollarSchemaGet[] = await firstValueFrom(this.smartCollarService.getSmartCollars());
+    //search collar
+    let collar = collars.find(collar => collar.serial_number === this.productCodeForm.value.productCode);
+    if(collar){
+      this.smartCollarService.assignSmartCollar(this.petId!, collar.id).subscribe(()=>{
+        alert('Collar asociado correctamente a la mascota');
+        this.isTracked = true;
+        this.closeDialogTracking();
+        this.petCollarData = collar;
+        }
+      );
+
+    }
+    else{
+      alert('No se encontró el collar');
+    }
   }
-  stopTrack(){
+  async stopTrack(){
+    let collar = await firstValueFrom(this.smartCollarService.getSmartCollarByPetId(this.petId!));
+    if(collar.length === 0)
+      return;
+    this.smartCollarService.assignSmartCollar(null,collar[0].id).subscribe(()=>{
+      alert('Collar desasociado correctamente');
+    });
     this.isTracked = false;
     this.closeDialogStopTracking();
   }
@@ -128,4 +177,5 @@ export class PetProfileViewComponent {
     this.dialogStopTrackVisible = false;
   }
   protected readonly TypeForm = TypeForm;
+  protected readonly UserType = UserType;
 }

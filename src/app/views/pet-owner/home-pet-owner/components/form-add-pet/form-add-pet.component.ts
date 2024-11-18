@@ -18,6 +18,7 @@ import { PetResponse } from '../../interfaces/PetResponse';
 import { TypeForm } from '../../interfaces/type-form.enum';
 import { PetService } from '../../../../../core/Pet/services/pet.service';
 import { PetSchemaRequest, PetSchemaResponse } from '../../../../../core/Pet/schema/pet.interface';
+import {AuthService} from "../../../../../core/auth/services/auth.service";
 
 @Component({
   selector: 'app-form-add-pet',
@@ -49,7 +50,7 @@ export class FormAddPetComponent {
   genders!: Gender [];
   buttonTitle:string = "";
 
-  
+
   ngOnInit() {
     console.log({location:"Form edit pet",pet:this.pet});
     this.genders = [
@@ -73,7 +74,8 @@ export class FormAddPetComponent {
     @Inject(FormBuilder) private fb: FormBuilder,
     private messageService: MessageService,
     private uploadService: UploadService,
-    private petsApiService: PetService
+    private petsApiService: PetService,
+    private authService:AuthService
   ) {
 
 
@@ -108,6 +110,7 @@ export class FormAddPetComponent {
     }
   }
   submitForm(){
+    const userId = this.authService.decodeToken()?.user_id!;
     const petRequest:PetSchemaRequest = {
       ...this.myForm.value,
       birthdate: formatDateToYYYYMMDD(this.myForm.value["birthdate"]),
@@ -116,7 +119,7 @@ export class FormAddPetComponent {
     };
     console.log({petRequest});
     if(this.mode === TypeForm.ADD){
-    this.petsApiService.createPet(1, petRequest).subscribe(data=>{
+    this.petsApiService.createPet(userId, petRequest).subscribe(data=>{
       alert("Pet created successfully");
     });}
     else{
