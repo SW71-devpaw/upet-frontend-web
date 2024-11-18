@@ -104,8 +104,8 @@ export class PetProfileViewComponent {
         this.isTracked = true;
         this.petCollarData = data[0];
         this.intervalIdRequestCollar = setInterval(()=>{
-          console.log('Requesting collar data');
           this.smartCollarService.getSmartCollarByPetId(this.petId!).subscribe(data => {
+            console.log('Requesting collar data');
             if(data.length>0){
               this.petCollarData = data[0];
             }
@@ -139,6 +139,7 @@ export class PetProfileViewComponent {
   async startTrack(){
     let collars:SmartCollarSchemaGet[] = await firstValueFrom(this.smartCollarService.getSmartCollars());
     //search collar
+    console.log({collars, inputValue:this.productCodeForm.value.productCode});
     let collar = collars.find(collar => collar.serial_number === this.productCodeForm.value.productCode);
     if(collar){
       this.smartCollarService.assignSmartCollar(this.petId!, collar.id).subscribe(()=>{

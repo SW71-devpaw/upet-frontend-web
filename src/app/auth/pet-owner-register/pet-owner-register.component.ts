@@ -73,7 +73,7 @@ export class PetOwnerRegisterComponent {
       location: this.registerForm.value.location
     };
     console.log('Datos de registro:', userData);
-    const user_id = this.authService.decodeToken()?.user_id;
+    const user_id:number = this.authService.decodeToken()?.user_id!;
 
     if (user_id) {
       this.petOwnerService.createPetOwner(user_id, userData).subscribe(

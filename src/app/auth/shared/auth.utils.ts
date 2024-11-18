@@ -7,14 +7,21 @@ export function navigateTo( token: string, router: Router, authService: AuthServ
     authService.storeToken(token);
     const tokenData = authService.decodeToken();
 
-    if(tokenData && tokenData.registered){
+    if(tokenData==null) {
+      router.navigate(['/auth/login']).then(r => r);
+      return;
+    }
+    console.log(tokenData);
+    if(tokenData.registered){
+      console.log("Entro a la condicion");
       tokenData.user_role == UserType.Owner ?
         router.navigate(['/pet-owner/home']) :
         router.navigate(['/vets/home']);
-    } else if (tokenData) {
+    } else {
+      console.log("Entro al else");
         tokenData.user_role == UserType.Owner ?
         router.navigate(['/auth/pet-owner']) :
-        router.navigate(['/auth/veterinarian']);
+        router.navigate(['/auth/vet']);
     }
 
 }

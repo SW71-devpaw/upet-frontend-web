@@ -11,25 +11,25 @@ export class SmartCollarService extends UpetApiService{
   private apiUrl: string;
   constructor(http:HttpClient) {
       super(http);
-      this.apiUrl = this.buildUrl('smart-collars');
+      this.apiUrl = this.buildUrl('');
   }
 
   //Obtener todos los collares inteligentes
   getSmartCollars():Observable<SmartCollarSchemaGet[]>{
-    return this.http.get<SmartCollarSchemaGet[]>(this.apiUrl).pipe(
+    return this.http.get<SmartCollarSchemaGet[]>(this.apiUrl+"smart-collars").pipe(
       catchError(this.handleError)
     );
   }
 
   //Asignar un collar inteligente a una mascota
   assignSmartCollar(petId: number|null, smartCollarId: number){
-    return this.http.put(`${this.apiUrl}/change_pet_association/${smartCollarId}/${petId}`, null).pipe(
+    return this.http.put(`${this.apiUrl}change_pet_association/${smartCollarId}/${petId}`, null).pipe(
       catchError(this.handleError)
     );
   }
 
   getSmartCollarByPetId(petId: number):Observable<SmartCollarSchemaGet[]>{
-    return this.http.get<SmartCollarSchemaGet[]>(`${this.apiUrl}/pet/${petId}`).pipe(
+    return this.http.get<SmartCollarSchemaGet[]>(`${this.apiUrl}smart-collars/pet/${petId}`).pipe(
       catchError(this.handleError)
     );
   }

@@ -31,7 +31,7 @@ export class RegisterComponent {
   register(){
     console.log('Form Submitted', this.registerForm.value);
 
-    const role:UserType = this.registerForm.value.role==UserType.PetOwner?UserType.Owner:UserType.Vet;
+    const role:UserType = this.registerForm.value.role=='Pet Owner'?UserType.Owner:UserType.Vet;
     const body:RegisterRequest = {
       name: this.registerForm.value.fullName,
       email: this.registerForm.value.email,
