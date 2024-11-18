@@ -5,6 +5,7 @@ import {HomeVetComponent} from "./home-vet/home-vet.component";
 import {AppointmentsViewComponent} from "../../shared/views/appointments-view/appointments-view.component";
 import {ReviewsVetComponent} from "./reviews-vet/reviews-vet.component";
 import {ProfileVetComponent} from "./profile-vet/profile-vet.component";
+import {NotificationsViewComponent} from "../../shared/views/notifications-view/notifications-view.component";
 
 export const VET_ROUTES: Route[] = [
   {
@@ -23,6 +24,9 @@ export const VET_ROUTES: Route[] = [
       },
       {
         path:'profile', component:ProfileVetComponent
+      },
+      {
+        path: 'notifications',component:NotificationsViewComponent
       }
     ]
   },

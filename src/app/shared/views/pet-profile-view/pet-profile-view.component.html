@@ -8,7 +8,7 @@
         <h1>{{ pet?.name }} <span [class]="pet?.gender=='Male'?'pi pi-mars female':'pi pi-venus male'"></span></h1>
       </div>
     </div>
-    <div class="flex ">
+    <div *ngIf="userRole==UserType.Owner" class="flex">
       <div class="header-profile-button mr-3">
         <button (click)="openDialogEdit()"><span class="pi pi-pencil"></span> Edit profile</button>
       </div>
@@ -26,7 +26,7 @@
   </div>
   <ng-container *ngIf="isTracked">
     <div>
-      IoT information
+      IoT information (<strong>{{petCollarData.serial_number}}</strong>)
     </div>
     <div class="badges-container">
       <div title="Temperatura en grados centigrados" class="iot-item">
@@ -36,10 +36,6 @@
       <div title="Temperatura en grados centigrados" class="iot-item">
         <div>Temperature <span class="material-symbols-outlined">device_thermostat</span></div>
         <div class="value">{{ petCollarData.temperature }} ªC</div>
-      </div>
-      <div title="Respiraciones por minuto" class="iot-item">
-        <div>RPM<span class="material-symbols-outlined">pacemaker</span></div>
-        <div class="value">{{ petCollarData.bpm }} rpm</div>
       </div>
       <div title="Latidos por minuto" class="iot-item">
         <div>LPM<span class="material-symbols-outlined">cardiology</span></div>
@@ -126,10 +122,10 @@
 
 <p-dialog  header="Start tracking" [modal]="true" [(visible)]="dialogStartTrackVisible" [style]="{ width: '40rem' }">
       <p>Do you want to start tracking your pet?</p>
-      <form>
+      <form [formGroup]="productCodeForm">
         <div class="card flex justify-content-center mb-4">
           <p-floatLabel class="mt-4">
-            <input pInputText id="code" formControlName="species" />
+            <input pInputText id="code"  formControlName="productCode" />
             <label for="code">Enter the product code</label>
           </p-floatLabel>
         </div>
