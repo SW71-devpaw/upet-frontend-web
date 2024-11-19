@@ -14,8 +14,10 @@
       *ngFor="let marker of markers"
       [title]="marker.name"
       [position]="marker.coords"
+      [label]="marker.name"
     >
     </map-marker>
+
   </google-map>
   <p-button (click)="myLocation()">My location</p-button>
 </div>

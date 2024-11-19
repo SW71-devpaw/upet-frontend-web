@@ -25,6 +25,8 @@ import {SmartCollarService} from "../../../core/SmartCollar/services/smart-colla
 import {SmartCollarSchemaGet} from "../../../core/SmartCollar/schema/smart-collar.interface";
 import {firstValueFrom} from "rxjs";
 import {UserType} from "../../../core/auth/enum/UserType.enum";
+import {CustomMapComponent} from "../../components/custom-map/custom-map.component";
+import {MapMarkerCustom} from "../../components/custom-map/interfaces/MapMarkerCustom";
 
 @Component({
   selector: 'app-pet-profile-view',
@@ -44,7 +46,8 @@ import {UserType} from "../../../core/auth/enum/UserType.enum";
     FloatLabelModule,
     PaginatorModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CustomMapComponent
   ],
   templateUrl: './pet-profile-view.component.html',
   styleUrl: './pet-profile-view.component.css'
@@ -64,8 +67,11 @@ export class PetProfileViewComponent {
 
   dialogStartTrackVisible = false;
   dialogStopTrackVisible = false;
+  dialogMapVisible = false;
+
   userRole:UserType;
   intervalIdRequestCollar: any;
+  petMarker:MapMarkerCustom[] = [];
 
   constructor(
     private router: ActivatedRoute,
@@ -108,6 +114,18 @@ export class PetProfileViewComponent {
             console.log('Requesting collar data');
             if(data.length>0){
               this.petCollarData = data[0];
+              this.petMarker = [
+                {
+                  coords: {
+                    lat: this.petCollarData.location.latitude,
+                    lng: this.petCollarData.location.longitude
+                  },
+                  name:this.pet?.name!,
+                  description:this.pet?.breed,
+                  iconUrl:this.pet?.image_url!,
+                }
+              ];
+              console.log("Coordenadas de la mascota",this.petMarker[0].coords);
             }
           });
         },100);
@@ -177,6 +195,13 @@ export class PetProfileViewComponent {
   closeDialogStopTracking(){
     this.dialogStopTrackVisible = false;
   }
+  openMapDialog(){
+    this.dialogMapVisible = true;
+  }
+  closeMapDialog = ()=>{
+    this.dialogMapVisible = false;
+  }
+
   protected readonly TypeForm = TypeForm;
   protected readonly UserType = UserType;
 }

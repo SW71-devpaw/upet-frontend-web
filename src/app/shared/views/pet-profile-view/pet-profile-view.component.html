@@ -41,7 +41,7 @@
         <div>LPM<span class="material-symbols-outlined">cardiology</span></div>
         <div class="value">{{ petCollarData.lpm }} lpm</div>
       </div>
-      <div class="iot-item justify-content-center">
+      <div class="iot-item justify-content-center" (click)="openMapDialog()">
         <div>GPS <span class="material-symbols-outlined">map</span></div>
       </div>
     </div>
@@ -142,3 +142,7 @@
       <p-button label="Stop" (onClick)="stopTrack()"/>
     </div>
 </p-dialog>
+<p-dialog [header]="'Location of my pet'" [modal]="true"  [(visible)]="dialogMapVisible"  [style]="{ width: '40rem' }">
+  <app-custom-map [closeDialog]="closeMapDialog" [markers]="petMarker"></app-custom-map>
+</p-dialog>
+
